@@ -1,0 +1,19 @@
+{{ define "main" }}
+  <h1>{{ .Title }}</h1>
+  <div class="post-list">
+    {{ range .Pages }}
+      <div class="post-item">
+        <h2 class="post-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+        <div class="post-meta">
+          <span>{{ .Date.Format "2006-01-02" }}</span> | 
+          <span>{{ .Params.author | default .Site.Params.author.name }}</span> | 
+          <span>{{ range .Params.categories }}<a href="{{ "/categories/" | relURL }}{{ . | urlize }}">{{ . }}</a> {{ end }}</span>
+        </div>
+        <div class="post-summary">
+          {{ .Summary }}
+        </div>
+        <a href="{{ .Permalink }}">阅读全文 &raquo;</a>
+      </div>
+    {{ end }}
+  </div>
+{{ end }}

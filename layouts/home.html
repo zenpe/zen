@@ -1,0 +1,20 @@
+{{ define "main" }}
+  <div class="post-list">
+    {{ $paginator := .Paginate (where .Site.RegularPages "Type" "in" .Site.Params.mainSections) }}
+    {{ range $paginator.Pages }}
+      <div class="post-card">
+        <div class="post-card-content">
+          <h2 class="post-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+          <div class="post-meta">
+            <span>🗓️ 发布于 {{ .Date.Format "2006-03-25" }}</span>
+            {{ with .Params.categories }} | <span>📁 {{ delimit . ", " }}</span>{{ end }}
+          </div>
+          <div class="post-summary">
+            {{ .Summary }}
+          </div>
+        </div>
+      </div>
+    {{ end }}
+  </div>
+  {{ partial "pagination.html" . }}
+{{ end }}

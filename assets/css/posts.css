@@ -1,0 +1,156 @@
+/* 文章卡片列表样式 */
+.posts-container {
+  max-width: 800px;
+  margin: 1rem auto;
+  padding: 0 1rem;
+}
+
+.post-card {
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.post-image {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.post-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.post-title {
+  margin: 0 0 0.75rem 0;
+}
+
+.post-title a {
+  color: #2c3e50;
+  text-decoration: none;
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.post-title a:hover {
+  color: #0366d6;
+}
+
+.post-meta {
+  margin-bottom: 0.75rem;
+  color: #666;
+  font-size: 0.875rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.meta-item i {
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+.meta-item a {
+  color: #666;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  margin-right: 0.5rem;
+}
+
+.meta-item a:last-child {
+  margin-right: 0;
+}
+
+.meta-item a:hover {
+  color: #0366d6;
+}
+
+.post-summary {
+  color: #4a4a4a;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+  text-align: justify;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  line-clamp: 3;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  padding: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.pagination a {
+  color: #666;
+  text-decoration: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+}
+
+.pagination a:hover {
+  background: #f5f5f5;
+  color: #333;
+}
+
+.pagination .page-number {
+  color: #999;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .posts-container {
+    padding: 0 0.75rem;
+    margin: 0.75rem auto;
+  }
+  
+  .post-card {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .post-title a {
+    font-size: 1.2rem;
+  }
+  
+  .post-meta {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .post-summary {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .pagination {
+    margin-top: 1.5rem;
+  }
+}

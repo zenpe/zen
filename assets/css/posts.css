@@ -1,7 +1,7 @@
 /* 文章卡片列表样式 */
 .posts-container {
   max-width: 800px;
-  margin: 1rem auto;
+  margin: 0 auto;
   padding: 0 1rem;
 }
 

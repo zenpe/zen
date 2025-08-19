@@ -18,6 +18,14 @@ title = 'My New Hugo Site'
     pageRef = '/tags'
     weight = 30
 
+  [[menu.main]]
+  name = 'Categories'
+  url = '/categories/'
+  weight = 40
+
+[permalinks]
+  posts = "/blog/:year/:month/:slug/"  
+
 [module]
   [module.hugoVersion]
     extended = false

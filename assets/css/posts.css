@@ -9,7 +9,7 @@
   background: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 1.5rem;
+  margin: 0 0 24px 0; /* 修改外边距，移除顶部外边距，保持底部间距一致 */
   padding: 1.25rem;
   display: flex;
   flex-direction: column;

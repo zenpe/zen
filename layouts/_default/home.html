@@ -4,11 +4,13 @@
   {{ range $paginator.Pages }}
   <article class="post-card {{ if .Params.featured_image }}has-background-image{{ end }}">
     <!-- 图片部分 -->
+    {{ if .Params.featured_image }}
     <div class="post-image">
       <a href="{{ .RelPermalink }}">
-        <img src="{{ .Params.featured_image | default "https://placehold.co/600x400" }}" alt="{{ .Title }}">
+        <img src="{{ .Params.featured_image }}" alt="{{ .Title }}">
       </a>
     </div>
+    {{ end }}
     <!-- 文字内容部分 -->
     <div class="post-content">
       <h2 class="post-title">

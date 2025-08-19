@@ -61,7 +61,7 @@
     width: 100%;
     background: #fff;
     box-shadow: 0 2px 8px 0 rgba(0,0,0,0.06);
-    position: fixed;
+    position: sticky;
     top: 0;
     z-index: 100;
     padding: 0;
@@ -343,36 +343,37 @@
     margin: 40px 0;
 }
 .post-card {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 2rem;
-    display: flex;
-    overflow: hidden;
-    height: 250px; /* 调整卡片高度 */
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  display: flex;
+  overflow: hidden;
+  height: 250px; /* 调整卡片高度 */
 }
 
 .post-card.has-background-image {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: rgba(255, 255, 255, 0.7); /* 半透明背景 */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(255, 255, 255, 0.7); /* 半透明背景 */
+  position: relative; /* 添加定位上下文 */
 }
 
 .post-card.has-background-image::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.7); /* 背景颜色调整透明度 */
-    z-index: -1;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7); /* 背景颜色调整透明度 */
+  z-index: 1;
 }
 
 .post-card.has-background-image .post-content {
-    padding: 1rem;
-    flex: 1;
+  position: relative;
+  z-index: 2; /* 确保文字内容在遮罩层之上 */
 }
 
 .post-title a {
@@ -526,7 +527,6 @@ body {
     gap: 20px;
     background: none; /* 移除容器背景色 */
     padding: 24px 40px; /* 添加内边距来替代原来的外边距 */
-    padding-top: 88px; /* 添加顶部内边距，避免被固定导航栏遮挡 (64px navbar height + 24px spacing) */
 }
 
 main {
@@ -675,11 +675,12 @@ a:hover {
   margin-bottom: 2rem;
 }
 
-.post-image img {
+.post-image {
   width: 450px;
   height: 300px;
   object-fit: cover;
   border-radius: 8px;
+  flex-shrink: 0; /* 防止图片在容器中被压缩 */
 }
 
 .post-content {

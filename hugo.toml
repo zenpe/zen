@@ -19,9 +19,9 @@ title = 'My New Hugo Site'
     weight = 30
 
   [[menu.main]]
-  name = 'Categories'
-  url = '/categories/'
-  weight = 40
+    name = 'Categories'
+    pageRef = '/categories/'
+    weight = 40
 
 [permalinks]
   posts = "/blog/:year/:month/:slug/"  

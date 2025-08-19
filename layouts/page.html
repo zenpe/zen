@@ -1,10 +1,21 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-
-  {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
-  {{ $dateHuman := .Date | time.Format ":date_long" }}
-  <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
-
-  {{ .Content }}
-  {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+  {{ with .Params.featured_image }}
+    <div class="post-featured-image">
+      <img src="{{ . | absURL }}" alt="{{ $.Title }}" />
+    </div>
+  {{ end }}
+  <div class="post-detail-card">
+    <h1 class="post-detail-title">{{ .Title }}</h1>
+    <div class="post-detail-meta">
+      <span>🗓️ {{ .Date.Format "2006-01-02" }}</span>
+      {{ with .Params.categories }} | <span>📁 {{ delimit . ", " }}</span>{{ end }}
+      {{ with .Params.author }} | <span>✍️ {{ . }}</span>{{ end }}
+    </div>
+    <div class="post-detail-content">
+      {{ .Content }}
+    </div>
+    <div class="post-detail-tags">
+      {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+    </div>
+  </div>
 {{ end }}

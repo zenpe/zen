@@ -1,0 +1,16 @@
+{{ define "main" }}
+<div class="terms-list-wrapper">
+  <div class="terms-title">
+    <span class="timeline-title-dot"></span>
+    {{ .Title }}
+  </div>
+  <div class="terms-list">
+    {{ range .Data.Terms.Alphabetical }}
+      <div class="terms-item">
+  <a class="terms-link" href="{{ .Page.Permalink }}">{{ .Page.Title }}</a>
+        <span class="terms-count">{{ .Count }}</span>
+      </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

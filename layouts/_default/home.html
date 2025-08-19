@@ -3,31 +3,31 @@
   {{ $paginator := .Paginate (where .Site.RegularPages "Type" "posts") }}
   {{ range $paginator.Pages }}
   <article class="post-card {{ if .Params.featured_image }}has-background-image{{ end }}">
-    <!-- 背景图片部分 -->
+    <!-- 图片部分 -->
     <div class="post-image">
-        <a href="{{ .RelPermalink }}">
-          <img src="{{ .Params.featured_image | default "https://placehold.co/600x400" }}" alt="{{ .Title }}">
-        </a>
+      <a href="{{ .RelPermalink }}">
+        <img src="{{ .Params.featured_image | default "https://placehold.co/600x400" }}" alt="{{ .Title }}">
+      </a>
     </div>
     <!-- 文字内容部分 -->
     <div class="post-content">
-        <h2 class="post-title">
-            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-        </h2>
-        <div class="post-meta">
-            <span class="meta-item">发表于 {{ .Date.Format "2006-01-02" }}</span>
-            {{ with .Params.categories }}
-            <span class="meta-divider">|</span>
-            <span class="meta-item">
-                {{ range . }}
-                    <a href="/categories/{{ . | urlize }}">{{ . }}</a>
-                {{ end }}
-            </span>
-            {{ end }}
-        </div>
-        <div class="post-summary">
-            {{ .Summary }}
-        </div>
+      <h2 class="post-title">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      </h2>
+      <div class="post-meta">
+        <span class="meta-item">发表于 {{ .Date.Format "2006-01-02" }}</span>
+        {{ with .Params.categories }}
+        <span class="meta-divider">|</span>
+        <span class="meta-item">
+          {{ range . }}
+            <a href="/categories/{{ . | urlize }}">{{ . }}</a>
+          {{ end }}
+        </span>
+        {{ end }}
+      </div>
+      <div class="post-summary">
+        {{ .Summary }}
+      </div>
     </div>
   </article>
   {{ end }}

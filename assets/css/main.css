@@ -61,7 +61,7 @@
     width: 100%;
     background: #fff;
     box-shadow: 0 2px 8px 0 rgba(0,0,0,0.06);
-    position: sticky;
+    position: fixed;
     top: 0;
     z-index: 100;
     padding: 0;
@@ -526,6 +526,7 @@ body {
     gap: 20px;
     background: none; /* 移除容器背景色 */
     padding: 24px 40px; /* 添加内边距来替代原来的外边距 */
+    padding-top: 88px; /* 添加顶部内边距，避免被固定导航栏遮挡 (64px navbar height + 24px spacing) */
 }
 
 main {

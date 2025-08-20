@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
             searchOverlay.style.display = 'flex';
         } catch (e) {
             console.error("Search error:", e);
-            searchResults.innerHTML = "<p>搜索出现错误，请稍后重试</p>";
+            searchResults.innerHTML = "<p class='no-results'>搜索出现错误，请稍后重试</p>";
             searchOverlay.style.display = 'flex';
         }
     }
@@ -94,10 +94,15 @@ document.addEventListener('DOMContentLoaded', function() {
         
         let html = "";
         results.forEach((result) => {
+            // Extract URL path for display
+            const url = new URL(result.url, window.location.origin);
+            const displayUrl = url.pathname;
+            
             html += `
                 <div class="search-result-item">
                     <h3><a href="${result.url}">${result.title}</a></h3>
-                    <p>${result.excerpt || (result.content ? result.content.substring(0, 100) + '...' : '')}</p>
+                    <p>${result.excerpt || (result.content ? result.content.substring(0, 120) + '...' : '')}</p>
+                    <span class="search-result-url">${displayUrl}</span>
                 </div>
             `;
         });

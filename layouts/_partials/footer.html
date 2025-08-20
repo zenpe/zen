@@ -1,1 +1,140 @@
-<p>Copyright {{ now.Year }}. All rights reserved.</p>
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-links">
+      <div class="footer-section">
+        <h3 class="footer-title">友情链接</h3>
+        <ul class="friend-links">
+          <li><a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a></li>
+          <li><a href="https://www.netlify.com/" target="_blank" rel="noopener">Netlify</a></li>
+          <li><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://stackoverflow.com/" target="_blank" rel="noopener">Stack Overflow</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3 class="footer-title">更多</h3>
+        <ul class="footer-menu">
+          <li><a href="/archive/">归档</a></li>
+          <li><a href="/sitemap.xml">站点地图</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; {{ now.Year }} <a href="{{ site.BaseURL }}">{{ site.Title }}</a>. 保留所有权利.</p>
+      <p class="footer-powered-by">基于 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+.site-footer {
+  background: #2c3e50;
+  color: #ecf0f1;
+  padding: 2rem 0 1rem;
+  margin-top: 3rem;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 200px;
+  margin-bottom: 1.5rem;
+}
+
+.footer-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #3498db;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.footer-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 2px;
+  background: #3498db;
+}
+
+.friend-links,
+.footer-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.friend-links li,
+.footer-menu li {
+  margin-bottom: 0.75rem;
+}
+
+.friend-links a,
+.footer-menu a {
+  color: #bdc3c7;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: 1rem;
+}
+
+.friend-links a:hover,
+.footer-menu a:hover {
+  color: #3498db;
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid #34495e;
+}
+
+.footer-bottom p {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  color: #95a5a6;
+}
+
+.footer-powered-by {
+  font-style: italic;
+}
+
+.footer-bottom a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .footer-links {
+    flex-direction: column;
+  }
+  
+  .footer-section {
+    margin-bottom: 1.5rem;
+  }
+  
+  .footer-container {
+    padding: 0 1rem;
+  }
+}
+</style>

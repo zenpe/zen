@@ -85,6 +85,23 @@
   color: #0366d6;
 }
 
+/* 字数统计和阅读时间样式 */
+.post-stats {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.word-count::after {
+  content: "•";
+  margin-left: 0.5rem;
+  color: #ccc;
+}
+
+.reading-time {
+  color: #888;
+}
+
 .post-content-wrapper {
   text-align: left; /* 确保内容左对齐 */
 }

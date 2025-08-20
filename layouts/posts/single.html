@@ -16,7 +16,9 @@
       {{ end }}
       <span class="meta-item" id="page-views">
         <span class="meta-icon">👁️</span>
-        <span class="meta-text">阅读量: <span id="busuanzi_value_page_pv">-</span> 次</span>
+        <span class="meta-text">阅读量: 
+          <span id="busuanzi_value_page_pv">-</span> 次
+        </span>
         <span class="loading-dots">
           <span>.</span><span>.</span><span>.</span>
         </span>
@@ -29,27 +31,14 @@
       {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
     </div>
   </div>
-
+  
   <script>
-    // 页面加载完成后尝试获取访问量数据
+    // 页面加载完成后显示访问量
     document.addEventListener('DOMContentLoaded', function() {
-      // 如果Busuanzi脚本尚未加载，则动态加载
-      if (typeof busuanzi === 'undefined') {
-        const script = document.createElement('script');
-        script.src = '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
-        script.async = true;
-        document.head.appendChild(script);
-        
-        // 添加加载动画
-        const viewsElement = document.getElementById('page-views');
-        viewsElement.classList.add('loading');
+      const pageViewsContainer = document.getElementById('page-views');
+      if (pageViewsContainer) {
+        pageViewsContainer.style.display = 'inline';
       }
-      
-      // 当Busuanzi加载完成时移除加载动画
-      window.pure_mini_js_loaded = function() {
-        const viewsElement = document.getElementById('page-views');
-        viewsElement.classList.remove('loading');
-      };
     });
   </script>
 {{ end }}

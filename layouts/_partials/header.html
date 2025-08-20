@@ -2,23 +2,44 @@
     <div class="navbar-inner">
         <div class="navbar-left">
             <span class="navbar-logo">🐶</span>
-            <span class="navbar-title">{{ site.Title }}</span>
+            <span class="navbar-title">一亩三分地</span>
         </div>
         <div class="navbar-center">
-            {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+            {{- partial "menu.html" (dict "menuID" "main" "page" .) -}}
         </div>
         <div class="navbar-right">
-            <form class="navbar-search" action="/search/" method="get">
-                <input type="text" name="q" placeholder="Search titles or contents..." />
+            <form class="navbar-search" action="/search/" method="get" id="search-form">
+                <input type="text" id="search-input" name="q" placeholder="Search titles or contents..." autocomplete="off"/>
+                <div id="search-overlay" class="search-overlay">
+                    <div class="search-modal">
+                        <div class="search-header">
+                            <h2>搜索结果</h2>
+                            <button id="close-search" class="close-button">&times;</button>
+                        </div>
+                        <div id="search-results" class="search-results"></div>
+                    </div>
+                </div>
             </form>
             <a class="navbar-icon" href="#" title="GitHub" aria-label="GitHub"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.5 2.87 8.32 6.84 9.67.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.36-3.37-1.36-.45-1.18-1.1-1.5-1.1-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05A9.38 9.38 0 0112 6.8c.85.004 1.7.12 2.5.35 1.9-1.33 2.74-1.05 2.74-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.8 0 .27.18.58.69.48A10.01 10.01 0 0022 12.26C22 6.58 17.52 2 12 2z"></path></svg></a>
-            <a class="navbar-icon" href="#" title="Language" aria-label="Language"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"></path></svg></a>
+            <a class="navbar-icon" href="#" title="Language" aria-label="Language"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 0 000 20"></path></svg></a>
             <button id="navbar-close-btn" style="margin-left:12px;background:transparent;border:none;cursor:pointer;font-size:1.5rem;line-height:1;" title="关闭导航栏" aria-label="关闭导航栏">×</button>
         </div>
     </div>
 </header>
+
+<!-- Algolia configuration -->
+<script>
+window.algoliaConfig = {
+    appId: '{{ .Site.Params.algolia.appId }}',
+    apiKey: '{{ .Site.Params.algolia.apiKey }}',
+    indexName: '{{ .Site.Params.algolia.indexName }}'
+};
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Close navbar button
     var closeBtn = document.getElementById('navbar-close-btn');
     if (closeBtn) {
         closeBtn.addEventListener('click', function(e) {
@@ -27,5 +48,216 @@ document.addEventListener('DOMContentLoaded', function() {
             if (navbar) navbar.style.display = 'none';
         });
     }
+    
+    // Search functionality
+    const searchForm = document.getElementById('search-form');
+    const searchInput = document.getElementById('search-input');
+    const searchOverlay = document.getElementById('search-overlay');
+    const searchResults = document.getElementById('search-results');
+    const closeSearchBtn = document.getElementById('close-search');
+    
+    // Initialize Algolia
+    const appId = window.algoliaConfig.appId;
+    const apiKey = window.algoliaConfig.apiKey;
+    const indexName = window.algoliaConfig.indexName;
+    
+    let searchClient, index;
+    if (appId && apiKey && indexName) {
+        searchClient = algoliasearch(appId, apiKey);
+        index = searchClient.initIndex(indexName);
+    }
+
+    // Handle search input for suggestions
+    if (searchInput && index) {
+        searchInput.addEventListener('input', function(e) {
+            const term = e.target.value.trim();
+            if (term.length > 0) {
+                performSearch(term);
+            } else {
+                searchOverlay.style.display = 'none';
+            }
+        });
+        
+        // Close suggestions when clicking outside
+        searchOverlay.addEventListener('click', function(e) {
+            // 如果点击的是遮罩层本身（而不是其内部元素）或者关闭按钮，则关闭浮层
+            if (e.target === searchOverlay) {
+                searchOverlay.style.display = 'none';
+            }
+        });
+        
+        // 处理关闭按钮点击事件
+        if (closeSearchBtn) {
+            closeSearchBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                searchOverlay.style.display = 'none';
+            });
+        }
+        
+        // Prevent form submission
+        searchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const term = searchInput.value.trim();
+            if (term.length > 0) {
+                performSearch(term);
+            }
+        });
+    }
+    
+    async function performSearch(term) {
+        if (!index) return;
+        
+        try {
+            const { hits } = await index.search(term, {
+                hitsPerPage: 6
+            });
+            displayResults(hits);
+            searchOverlay.style.display = 'flex';
+        } catch (e) {
+            console.error("Search error:", e);
+            searchResults.innerHTML = "<p>搜索出现错误，请稍后重试</p>";
+            searchOverlay.style.display = 'flex';
+        }
+    }
+    
+    function displayResults(results) {
+        if (results.length === 0) {
+            searchResults.innerHTML = "<p class='no-results'>没有找到相关结果</p>";
+            return;
+        }
+        
+        let html = "";
+        results.forEach((result) => {
+            html += `
+                <div class="search-result-item">
+                    <h3><a href="${result.url}">${result.title}</a></h3>
+                    <p>${result.excerpt || (result.content ? result.content.substring(0, 100) + '...' : '')}</p>
+                </div>
+            `;
+        });
+        searchResults.innerHTML = html;
+        
+        // Add click handlers to links to close overlay when navigating
+        const links = searchResults.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                searchOverlay.style.display = 'none';
+            });
+        });
+    }
 });
 </script>
+
+<style>
+.navbar-search {
+    position: relative;
+    display: inline-block;
+}
+
+.navbar-search input {
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.search-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-modal {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+}
+
+.search-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.search-header h2 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #999;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-button:hover {
+    color: #333;
+}
+
+.search-results {
+    padding: 15px 20px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.search-result-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item h3 {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+}
+
+.search-result-item a {
+    text-decoration: none;
+    color: #1976d2;
+}
+
+.search-result-item a:hover {
+    text-decoration: underline;
+}
+
+.search-result-item p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.no-results {
+    text-align: center;
+    color: #999;
+    padding: 30px 0;
+    margin: 0;
+}
+</style>

@@ -335,21 +335,27 @@
     margin-top: 2.5em;
     font-size: 1.1rem;
 }
-/* 列表页卡片样式 */
-.post-list {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    margin: 40px 0;
+/* 文章卡片列表样式 */
+.posts-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
+
 .post-card {
-  background: #fff;
+  background: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 0 0 24px 0; /* 修改外边距，移除顶部外边距，保持底部间距一致 */
+  padding: 1.25rem;
   display: flex;
-  overflow: hidden;
-  height: 250px; /* 调整卡片高度 */
+  flex-direction: column;
+  transition: all 0.2s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .post-card.has-background-image {
@@ -376,31 +382,80 @@
   z-index: 2; /* 确保文字内容在遮罩层之上 */
 }
 
+.post-image {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.post-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.post-title {
+  margin: 0 0 0.75rem 0;
+}
+
 .post-title a {
-    font-size: 1.5rem;
-    color: #333;
-    text-decoration: none;
-    transition: color 0.3s;
+  color: #2c3e50;
+  text-decoration: none;
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.4;
 }
 
 .post-title a:hover {
-    color: #007bff;
+  color: #0366d6;
 }
 
 .post-meta {
-    margin: 1rem 0;
-    color: #888;
-    font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+  color: #666;
+  font-size: 0.875rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.meta-item i {
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+.meta-item a {
+  color: #666;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  margin-right: 0.5rem;
+}
+
+.meta-item a:last-child {
+  margin-right: 0;
+}
+
+.meta-item a:hover {
+  color: #0366d6;
 }
 
 .post-summary {
-    line-height: 1.6;
-    color: #555;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* 限制显示两行 */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  color: #4a4a4a;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+  text-align: justify;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  line-clamp: 3;
 }
 
 .pagination {

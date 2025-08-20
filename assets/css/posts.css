@@ -34,6 +34,7 @@
 
 .post-title {
   margin: 0 0 0.75rem 0;
+  text-align: left;
 }
 
 .post-title a {
@@ -55,6 +56,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  text-align: left;
 }
 
 .meta-item {
@@ -83,18 +85,24 @@
   color: #0366d6;
 }
 
+.post-content-wrapper {
+  text-align: left; /* 确保内容左对齐 */
+}
+
 .post-summary {
-  color: #4a4a4a;
+  display: none; /* 隐藏默认的摘要 */
+}
+
+.post-content .post-body {
   font-size: 0.95rem;
   line-height: 1.6;
-  margin: 0;
-  text-align: justify;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  margin-top: 1rem;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2; /* 设置显示行数为2行 */
   -webkit-box-orient: vertical;
-  line-clamp: 3;
+  overflow: hidden;
+  text-align: left; /* 确保内容左对齐 */
+  text-overflow: ellipsis;
 }
 
 .pagination {

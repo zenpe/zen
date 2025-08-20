@@ -1,19 +1,63 @@
 {{ define "main" }}
   <h1>{{ .Title }}</h1>
-  <div class="post-list">
-    {{ range .Pages }}
-      <div class="post-item">
-        <h2 class="post-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
-        <div class="post-meta">
-          <span>{{ .Date.Format "2006-01-02" }}</span> | 
-          <span>{{ .Params.author | default .Site.Params.author.name }}</span> | 
-          <span>{{ range .Params.categories }}<a href="{{ "/categories/" | relURL }}{{ . | urlize }}">{{ . }}</a> {{ end }}</span>
-        </div>
-        <div class="post-summary">
-          {{ .Summary }}
-        </div>
-        <a href="{{ .Permalink }}">阅读全文 &raquo;</a>
+  
+  <div class="archive">
+    {{ range site.RegularPages.GroupByDate "2006年01月" }}
+      <h2 class="archive-month">{{ .Key }}</h2>
+      <div class="archive-posts">
+        {{ range .Pages }}
+          <div class="archive-post">
+            <div class="archive-post-date">{{ .Date.Format "01-02" }}</div>
+            <div class="archive-post-title">
+              <a href="{{ .Permalink }}">{{ .Title }}</a>
+            </div>
+          </div>
+        {{ end }}
       </div>
     {{ end }}
   </div>
+
+  <style>
+    .archive {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .archive-month {
+      border-bottom: 2px solid #eee;
+      padding-bottom: 10px;
+      margin: 30px 0 20px 0;
+      color: #333;
+    }
+    
+    .archive-posts {
+      margin-left: 20px;
+    }
+    
+    .archive-post {
+      display: flex;
+      padding: 10px 0;
+      border-bottom: 1px solid #f5f5f5;
+    }
+    
+    .archive-post-date {
+      width: 60px;
+      color: #999;
+      font-size: 14px;
+    }
+    
+    .archive-post-title {
+      flex: 1;
+    }
+    
+    .archive-post-title a {
+      text-decoration: none;
+      color: #1976d2;
+    }
+    
+    .archive-post-title a:hover {
+      text-decoration: underline;
+    }
+  </style>
 {{ end }}

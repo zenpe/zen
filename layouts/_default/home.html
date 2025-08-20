@@ -27,6 +27,10 @@
             {{ end }}
           </span>
           {{ end }}
+          <span class="meta-divider">|</span>
+          <span class="meta-item">
+            <span id="busuanzi_value_page_pv_{{ .File.UniqueID }}" data-page-url="{{ .Permalink }}">-</span> 次阅读
+          </span>
         </div>
         <div class="post-body">
           {{ .Content | plainify | truncate 300 }} <!-- 显示正文内容并截断，去除格式 -->
@@ -48,4 +52,29 @@
   </div>
   {{ end }}
 </div>
+
+<script>
+  // 为首页文章列表添加访问量统计
+  document.addEventListener('DOMContentLoaded', function() {
+    // 检查Busuanzi是否已加载，如果没有则加载
+    if (typeof busuanzi === 'undefined') {
+      // Busuanzi脚本应该已经在侧边栏中加载，这里确保它存在
+      const checkBusuanzi = setInterval(function() {
+        if (typeof busuanzi !== 'undefined') {
+          clearInterval(checkBusuanzi);
+        }
+      }, 100);
+      
+      // 如果5秒后仍未加载，则手动加载
+      setTimeout(function() {
+        if (typeof busuanzi === 'undefined') {
+          const script = document.createElement('script');
+          script.src = '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
+          script.async = true;
+          document.head.appendChild(script);
+        }
+      }, 5000);
+    }
+  });
+</script>
 {{ end }}

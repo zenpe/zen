@@ -1,27 +1,31 @@
 {{ define "main" }}
 <div class="archive-container">
-  <h1 class="archive-title">{{ .Title }}</h1>
-  
-  {{ range (where site.RegularPages "Type" "posts").GroupByDate "2006-01" }}
-    <div class="archive-group">
-      <h2 class="archive-month">{{ .Key }}</h2>
-      <ul class="archive-list">
-        {{ range .Pages }}
-          <li class="archive-item">
-            <span class="archive-date">{{ .Date.Format "01-02" }}</span>
-            <a href="{{ .Permalink }}" class="archive-link">{{ .Title }}</a>
-            <span class="archive-meta">
-              <span class="archive-categories">
-                {{ range .Params.categories }}
-                  <span class="archive-category">{{ . }}</span>
-                {{ end }}
+  <div class="archive-content">
+    {{ range (where site.RegularPages "Type" "posts").GroupByDate "2006-01" }}
+      <div class="archive-group">
+        <h2 class="archive-month">{{ .Key }}</h2>
+        <ul class="archive-list">
+          {{ range .Pages }}
+            <li class="archive-item">
+              <span class="archive-date">{{ .Date.Format "01-02" }}</span>
+              <a href="{{ .Permalink }}" class="archive-link">{{ .Title }}</a>
+              <span class="archive-meta">
+                <span class="archive-categories">
+                  {{ range .Params.categories }}
+                    <span class="archive-category">{{ . }}</span>
+                  {{ end }}
+                </span>
+                <span class="archive-stats">
+                  <span class="archive-word-count">{{ .WordCount }} 字</span>
+                  <span class="archive-reading-time">{{ .ReadingTime }} 分钟</span>
+                </span>
               </span>
-            </span>
-          </li>
-        {{ end }}
-      </ul>
-    </div>
-  {{ end }}
+            </li>
+          {{ end }}
+        </ul>
+      </div>
+    {{ end }}
+  </div>
 </div>
 
 <style>
@@ -31,26 +35,30 @@
   padding: 0 1rem;
 }
 
-.archive-title {
-  font-size: 2rem;
-  font-weight: 700;
-  text-align: center;
-  margin: 2rem 0;
-  color: #2c3e50;
+.archive-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
 }
 
 .archive-group {
-  margin-bottom: 2.5rem;
   background: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 1.5rem;
+  padding: 1.25rem;
+  margin: 0 0 24px 0;
+  transition: all 0.2s ease;
+}
+
+.archive-group:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .archive-month {
   font-size: 1.4rem;
   font-weight: 600;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
   padding-bottom: 0.75rem;
   border-bottom: 2px solid #eee;
   color: #2c3e50;
@@ -64,7 +72,7 @@
 
 .archive-item {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   padding: 0.75rem 0;
   border-bottom: 1px solid #f5f5f5;
 }
@@ -74,33 +82,35 @@
 }
 
 .archive-date {
-  width: 50px;
   color: #7f8c8d;
   font-size: 0.9rem;
   font-weight: 500;
+  margin-bottom: 0.25rem;
 }
 
 .archive-link {
-  flex: 1;
-  margin: 0 1rem;
   text-decoration: none;
   color: #2c3e50;
   font-weight: 500;
   transition: color 0.2s ease;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
 }
 
 .archive-link:hover {
-  color: #3498db;
+  color: #0366d6;
 }
 
 .archive-meta {
   display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
 .archive-categories {
   display: flex;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .archive-category {
@@ -111,44 +121,53 @@
   border-radius: 12px;
 }
 
+.archive-stats {
+  display: flex;
+  gap: 0.75rem;
+  font-size: 0.8rem;
+  color: #95a5a6;
+}
+
+.archive-word-count::after {
+  content: "•";
+  margin-left: 0.75rem;
+}
+
 @media (max-width: 768px) {
   .archive-container {
     padding: 0 0.75rem;
   }
   
-  .archive-title {
-    font-size: 1.7rem;
-    margin: 1.5rem 0;
-  }
-  
   .archive-group {
     padding: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
   }
   
   .archive-month {
     font-size: 1.2rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
   }
   
   .archive-item {
-    flex-direction: column;
-    align-items: flex-start;
     padding: 0.75rem 0;
   }
   
   .archive-date {
-    width: auto;
-    margin-bottom: 0.25rem;
     font-size: 0.8rem;
   }
   
   .archive-link {
-    margin: 0.25rem 0;
     font-size: 1rem;
+    margin-bottom: 0.25rem;
   }
   
   .archive-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+  
+  .archive-stats {
     margin-top: 0.25rem;
   }
 }

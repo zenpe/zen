@@ -1,48 +1,48 @@
 /* 文章卡片列表样式 */
 .posts-container {
-  max-width: 800px;
+  max-width: 900px; /* 增加最大宽度 */
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 1.5rem; /* 增加左右内边距 */
 }
 
 .post-card {
   background: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 0 0 24px 0; /* 修改外边距，移除顶部外边距，保持底部间距一致 */
-  padding: 1.25rem;
+  border-radius: 12px; /* 增加圆角 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* 优化阴影 */
+  margin: 0 0 32px 0;
+  padding: 1.75rem; /* 增加内边距 */
   display: flex;
   flex-direction: column;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease; /* 优化过渡效果 */
 }
 
 .post-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12); /* 优化悬停阴影 */
 }
 
 .post-image {
   width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem; /* 增加图片下方间距 */
 }
 
 .post-image img {
   width: 100%;
   height: auto;
-  border-radius: 4px;
+  border-radius: 8px; /* 增加图片圆角 */
 }
 
 .post-title {
-  margin: 0 0 0.75rem 0;
+  margin: 0 0 1rem 0;
   text-align: left;
 }
 
 .post-title a {
   color: #2c3e50;
   text-decoration: none;
-  font-size: 1.35rem;
-  font-weight: 600;
-  line-height: 1.4;
+  font-size: 1.75rem; /* 增加标题字号 */
+  font-weight: 700; /* 增加标题字重 */
+  line-height: 1.3;
 }
 
 .post-title a:hover {
@@ -50,28 +50,28 @@
 }
 
 .post-meta {
-  margin-bottom: 0.75rem;
-  color: #666;
-  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  color: #888; /* 调暗元信息颜色 */
+  font-size: 0.8rem; /* 减小元信息字号 */
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.5rem; /* 增加元信息间距 */
   text-align: left;
 }
 
 .meta-item {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.5rem;
 }
 
 .meta-item i {
-  font-size: 0.95rem;
-  opacity: 0.8;
+  font-size: 1rem;
+  opacity: 0.7;
 }
 
 .meta-item a {
-  color: #666;
+  color: #888;
   text-decoration: none;
   transition: color 0.2s ease;
   margin-right: 0.5rem;
@@ -99,26 +99,26 @@
 }
 
 .reading-time {
-  color: #888;
+  color: #aaa;
 }
 
 .post-content-wrapper {
-  text-align: left; /* 确保内容左对齐 */
+  text-align: left;
 }
 
 .post-summary {
-  display: none; /* 隐藏默认的摘要 */
+  display: none;
 }
 
 .post-content .post-body {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin-top: 1rem;
+  font-size: 1rem; /* 增加正文字号 */
+  line-height: 1.7; /* 增加行高 */
+  margin-top: 1.5rem;
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* 设置显示行数为2行 */
+  -webkit-line-clamp: 3; /* 设置显示行数为3行 */
   -webkit-box-orient: vertical;
   overflow: hidden;
-  text-align: left; /* 确保内容左对齐 */
+  text-align: left;
   text-overflow: ellipsis;
 }
 
@@ -126,56 +126,61 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.75rem;
-  margin-top: 2rem;
-  padding: 0.5rem 0;
-  font-size: 0.9rem;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  padding: 1rem 0;
+  font-size: 1rem;
 }
 
 .pagination a {
-  color: #666;
+  color: #888;
   text-decoration: none;
-  padding: 0.4rem 0.8rem;
-  border-radius: 3px;
-  transition: all 0.2s ease;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  border: 1px solid #eee; /* 增加边框 */
 }
 
 .pagination a:hover {
-  background: #f5f5f5;
-  color: #333;
+  background: #0366d6;
+  color: #fff;
+  border-color: #0366d6;
 }
 
 .pagination .page-number {
-  color: #999;
-  font-size: 0.85rem;
+  color: #aaa;
+  font-size: 0.9rem;
+  padding: 0.6rem 1rem;
+  background: #f5f5f5;
+  border-radius: 6px;
 }
 
 @media (max-width: 768px) {
   .posts-container {
-    padding: 0 0.75rem;
-    margin: 0.75rem auto;
+    padding: 0 1rem;
+    margin: 1rem auto;
   }
   
   .post-card {
-    padding: 1rem;
-    margin-bottom: 1rem;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
   }
   
   .post-title a {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
   
   .post-meta {
-    font-size: 0.8rem;
-    margin-bottom: 0.5rem;
+    font-size: 0.75rem;
+    margin-bottom: 0.75rem;
   }
 
   .post-summary {
-    font-size: 0.9rem;
-    line-height: 1.5;
+    font-size: 0.95rem;
+    line-height: 1.6;
   }
 
   .pagination {
-    margin-top: 1.5rem;
+    margin-top: 2rem;
   }
 }

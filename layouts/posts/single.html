@@ -25,7 +25,7 @@
       </span>
     </div>
     <div class="post-detail-content">
-      {{ .Content }}
+      {{ .Content | replaceRE "<img src=\"([^\"]+)\"" "<a href=\"$1\" data-fslightbox><img src=\"$1\"" | safeHTML }}
     </div>
     <div class="post-detail-tags">
       {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
@@ -41,4 +41,5 @@
       }
     });
   </script>
+<script src="{{ "js/fslightbox.js" | relURL }}"></script>
 {{ end }}

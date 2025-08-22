@@ -430,6 +430,15 @@
     margin-top: 2.5em;
     font-size: 1.1rem;
 }
+
+.post-detail-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 1.5rem 0;
+    cursor: pointer;
+}
 /* 文章卡片列表样式 */
 .posts-container {
   max-width: 800px;

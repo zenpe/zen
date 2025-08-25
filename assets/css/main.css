@@ -439,128 +439,7 @@
     margin: 1.5rem 0;
     cursor: pointer;
 }
-/* 文章卡片列表样式 */
-.posts-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
 
-.post-card {
-  background: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 0 0 24px 0; /* 修改外边距，移除顶部外边距，保持底部间距一致 */
-  padding: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  transition: all 0.2s ease;
-}
-
-.post-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.post-card.has-background-image {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: rgba(255, 255, 255, 0.7); /* 半透明背景 */
-  position: relative; /* 添加定位上下文 */
-}
-
-.post-card.has-background-image::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.7); /* 背景颜色调整透明度 */
-  z-index: 1;
-}
-
-.post-card.has-background-image .post-content {
-  position: relative;
-  z-index: 2; /* 确保文字内容在遮罩层之上 */
-}
-
-.post-image {
-  width: 100%;
-  margin-bottom: 1rem;
-}
-
-.post-image img {
-  width: 100%;
-  height: auto;
-  border-radius: 4px;
-}
-
-.post-title {
-  margin: 0 0 0.75rem 0;
-}
-
-.post-title a {
-  color: #2c3e50;
-  text-decoration: none;
-  font-size: 1.35rem;
-  font-weight: 600;
-  line-height: 1.4;
-}
-
-.post-title a:hover {
-  color: #0366d6;
-}
-
-.post-meta {
-  margin-bottom: 0.75rem;
-  color: #666;
-  font-size: 0.875rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.meta-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.meta-item i {
-  font-size: 0.95rem;
-  opacity: 0.8;
-}
-
-.meta-item a {
-  color: #666;
-  text-decoration: none;
-  transition: color 0.2s ease;
-  margin-right: 0.5rem;
-}
-
-.meta-item a:last-child {
-  margin-right: 0;
-}
-
-.meta-item a:hover {
-  color: #0366d6;
-}
-
-.post-summary {
-  color: #4a4a4a;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin: 0;
-  text-align: justify;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  line-clamp: 3;
-}
 
 .pagination {
     display: flex;
@@ -694,11 +573,13 @@ main {
     padding: 0; /* 移除顶部内边距 */
     border-radius: 0;
     box-shadow: none;
+    margin-top: 2rem;
 }
 
 aside {
     width: 300px;
     flex-shrink: 0; /* 防止侧边栏在小屏幕上被压缩 */
+    margin-top: 2rem;
 }
 
 /* 移除 header, footer 蓝色背景，header 只由 .top-navbar 控制 */
@@ -941,4 +822,17 @@ a:hover {
 
 .timeline-wrapper {
     margin-top: 0; /* 移除时间线容器的顶部外边距 */
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 0 1rem;
+  }
+
+  main,
+  aside {
+    width: 100%;
+    margin-top: 0;
+  }
 }

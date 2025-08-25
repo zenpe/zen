@@ -1,4 +1,4 @@
-// Search functionality
+// Search functionality with lazy loading of Algolia library
 document.addEventListener('DOMContentLoaded', function() {
     // Get DOM elements
     const searchForm = document.getElementById('search-form');
@@ -23,21 +23,71 @@ document.addEventListener('DOMContentLoaded', function() {
     const indexName = window.algoliaConfig ? window.algoliaConfig.indexName : '';
     
     let searchClient, index;
-    if (appId && apiKey && indexName) {
-        // Dynamically load Algolia library if not already loaded
-        if (typeof algoliasearch !== 'undefined') {
+
+    // Function to dynamically load Algolia library
+    function loadAlgoliaLibrary() {
+        return new Promise((resolve, reject) => {
+            if (typeof algoliasearch !== 'undefined') {
+                // Already loaded
+                resolve();
+                return;
+            }
+
+            // Create script element for Algolia library
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js';
+            script.onload = () => resolve();
+            script.onerror = () => reject(new Error('Failed to load Algolia library'));
+            document.head.appendChild(script);
+        });
+    }
+
+    // Initialize Algolia search (called only when needed)
+    async function initializeAlgolia() {
+        if (!appId || !apiKey || !indexName) {
+            console.warn('Algolia configuration is missing');
+            return false;
+        }
+
+        try {
+            await loadAlgoliaLibrary();
             searchClient = algoliasearch(appId, apiKey);
             index = searchClient.initIndex(indexName);
-        } else {
-            console.warn('Algolia library not loaded');
+            return true;
+        } catch (error) {
+            console.error('Failed to initialize Algolia:', error);
+            return false;
         }
     }
 
     // Handle search input for suggestions
-    if (searchInput && index) {
-        searchInput.addEventListener('input', function(e) {
+    if (searchInput) {
+        let algoliaInitialized = false;
+        
+        searchInput.addEventListener('focus', async function() {
+            // Initialize Algolia on first focus
+            if (!algoliaInitialized) {
+                algoliaInitialized = await initializeAlgolia();
+                if (!algoliaInitialized) {
+                    searchResults.innerHTML = "<p class='no-results'>搜索功能初始化失败</p>";
+                    searchOverlay.style.display = 'flex';
+                    return;
+                }
+            }
+        });
+
+        searchInput.addEventListener('input', async function(e) {
             const term = e.target.value.trim();
             if (term.length > 0) {
+                // Initialize Algolia if not already done
+                if (!algoliaInitialized) {
+                    algoliaInitialized = await initializeAlgolia();
+                    if (!algoliaInitialized) {
+                        searchResults.innerHTML = "<p class='no-results'>搜索功能初始化失败</p>";
+                        searchOverlay.style.display = 'flex';
+                        return;
+                    }
+                }
                 performSearch(term);
             } else {
                 searchOverlay.style.display = 'none';
@@ -61,10 +111,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Prevent form submission
-        searchForm.addEventListener('submit', function(e) {
+        searchForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             const term = searchInput.value.trim();
             if (term.length > 0) {
+                // Initialize Algolia if not already done
+                if (!algoliaInitialized) {
+                    algoliaInitialized = await initializeAlgolia();
+                    if (!algoliaInitialized) {
+                        searchResults.innerHTML = "<p class='no-results'>搜索功能初始化失败</p>";
+                        searchOverlay.style.display = 'flex';
+                        return;
+                    }
+                }
                 performSearch(term);
             }
         });

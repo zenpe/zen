@@ -1,6 +1,3 @@
-<!-- Algolia search library -->
-<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
-
 {{- $js := resources.Match "js/*.js" | resources.Concat "js/bundle.js" -}}
 
 {{- if hugo.IsDevelopment }}

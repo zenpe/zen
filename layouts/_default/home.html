@@ -32,9 +32,8 @@
             {{ $wordCount := .WordCount }}
             {{ $readingTime := .ReadingTime }}
             <span class="post-stats">
-              <span class="word-count">共 {{ $wordCount }} 字</span>
-              <span class="meta-divider"> • </span>
-              <span class="reading-time">约 {{ $readingTime }} 分钟阅读</span>
+              <span class="word-count">{{ $wordCount }} 字</span>
+              <span class="reading-time">约 {{ $readingTime }} 分钟</span>
             </span>
           </span>
         </div>

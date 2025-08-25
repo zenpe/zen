@@ -119,7 +119,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const displayUrl = url.pathname;
 
             const title = highlight(doc.title, term);
-            const excerpt = highlight(doc.excerpt || (doc.content ? doc.content.substring(0, 120) + '...' : ''), term);
+            const excerptContent = doc.excerpt || createExcerpt(doc.content, term);
+            const excerpt = highlight(excerptContent, term);
 
             return `
                 <div class="search-result-item">
@@ -138,6 +139,30 @@ document.addEventListener('DOMContentLoaded', function () {
                 searchOverlay.style.display = 'none';
             });
         });
+    }
+
+    function createExcerpt(content, term, maxLength = 120) {
+        if (!content) {
+            return '';
+        }
+
+        const termIndex = content.toLowerCase().indexOf(term.toLowerCase());
+        if (termIndex === -1) {
+            return content.length > maxLength ? content.substring(0, maxLength) + '...' : content;
+        }
+
+        const start = Math.max(0, termIndex - Math.floor(maxLength / 2));
+        const end = Math.min(content.length, termIndex + term.length + Math.floor(maxLength / 2));
+
+        let excerpt = content.substring(start, end);
+        if (start > 0) {
+            excerpt = '...' + excerpt;
+        }
+        if (end < content.length) {
+            excerpt = excerpt + '...';
+        }
+
+        return excerpt;
     }
 
     function highlight(text, term) {

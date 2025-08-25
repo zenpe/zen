@@ -20,7 +20,13 @@
           </div>
           <div class="timeline-main">
             {{ with .Params.thumbnail }}
-              <img class="timeline-thumb" src="{{ . | absURL }}" alt="{{ $.Title }}" />
+              {{ $thumb := resources.Get . }}
+              {{ if $thumb }}
+                {{ $thumbWebp := $thumb.Resize "100x75 webp" }}
+                <img class="timeline-thumb" src="{{ $thumbWebp.RelPermalink }}" alt="{{ $.Title }}" />
+              {{ else }}
+                <img class="timeline-thumb" src="{{ . | absURL }}" alt="{{ $.Title }}" />
+              {{ end }}
             {{ end }}
             <a class="timeline-title-link" href="{{ .Permalink }}">{{ .Title }}</a>
           </div>

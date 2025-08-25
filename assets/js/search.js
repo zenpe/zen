@@ -92,20 +92,20 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        let html = "";
-        results.forEach((result) => {
+        const html = results.map((result) => {
             // Extract URL path for display
             const url = new URL(result.url, window.location.origin);
             const displayUrl = url.pathname;
             
-            html += `
+            return `
                 <div class="search-result-item">
                     <h3><a href="${result.url}">${result.title}</a></h3>
                     <p>${result.excerpt || (result.content ? result.content.substring(0, 120) + '...' : '')}</p>
                     <span class="search-result-url">${displayUrl}</span>
                 </div>
             `;
-        });
+        }).join('');
+        
         searchResults.innerHTML = html;
         
         // Add click handlers to links to close overlay when navigating

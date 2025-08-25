@@ -1,36 +1,36 @@
 .site-footer {
-  background: #2c3e50;
-  color: #ecf0f1;
-  padding: 2rem 0 1rem;
-  margin-top: 3rem;
+  background: var(--color-dark-background);
+  color: var(--color-light-text);
+  padding: var(--spacing-lg) 0 var(--spacing-sm);
+  margin-top: var(--spacing-xxl);
 }
 
 .footer-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 var(--spacing-md);
 }
 
 .footer-links {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin-bottom: 2rem;
+  margin-bottom: var(--spacing-lg);
 }
 
 .footer-section {
   flex: 1;
   min-width: 200px;
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--spacing-md);
 }
 
 .footer-title {
   font-size: 1.2rem;
   font-weight: 600;
-  margin-bottom: 1rem;
-  color: #3498db;
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-blue-accent);
   position: relative;
-  padding-bottom: 0.5rem;
+  padding-bottom: var(--spacing-xs);
 }
 
 .footer-title::after {
@@ -40,7 +40,7 @@
   left: 0;
   width: 50px;
   height: 2px;
-  background: #3498db;
+  background: var(--color-blue-accent);
 }
 
 .friend-links,
@@ -57,7 +57,7 @@
 
 .friend-links a,
 .footer-menu a {
-  color: #bdc3c7;
+  color: var(--color-gray-light);
   text-decoration: none;
   transition: color 0.3s ease;
   font-size: 1rem;
@@ -65,20 +65,20 @@
 
 .friend-links a:hover,
 .footer-menu a:hover {
-  color: #3498db;
+  color: var(--color-blue-accent);
   text-decoration: underline;
 }
 
 .footer-bottom {
   text-align: center;
-  padding-top: 1.5rem;
-  border-top: 1px solid #34495e;
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-dark-border);
 }
 
 .footer-bottom p {
-  margin: 0.5rem 0;
+  margin: var(--spacing-xs) 0;
   font-size: 0.95rem;
-  color: #95a5a6;
+  color: var(--color-gray-medium);
 }
 
 .footer-powered-by {
@@ -86,7 +86,7 @@
 }
 
 .footer-bottom a {
-  color: #3498db;
+  color: var(--color-blue-accent);
   text-decoration: none;
 }
 
@@ -100,10 +100,10 @@
   }
   
   .footer-section {
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--spacing-md);
   }
   
   .footer-container {
-    padding: 0 1rem;
+    padding: 0 var(--spacing-sm);
   }
 }

@@ -1,7 +1,21 @@
 {{ define "main" }}
   {{ with .Params.featured_image }}
     <div class="post-featured-image">
-      <img src="{{ . | absURL }}" alt="{{ $.Title }}" />
+      {{ $image := resources.Get . }}
+      {{ if $image }}
+        {{ $tiny := $image.Resize "200x webp" }}
+        {{ $small := $image.Resize "480x webp" }}
+        {{ $medium := $image.Resize "800x webp" }}
+        {{ $large := $image.Resize "1200x webp" }}
+        <img
+          src="{{ $medium.RelPermalink }}"
+          srcset="{{ $tiny.RelPermalink }} 200w, {{ $small.RelPermalink }} 480w, {{ $medium.RelPermalink }} 800w, {{ $large.RelPermalink }} 1200w"
+          sizes="(max-width: 600px) 480px, 800px"
+          alt="{{ $.Title }}"
+        />
+      {{ else }}
+        <img src="{{ . | absURL }}" alt="{{ $.Title }}" />
+      {{ end }}
     </div>
   {{ end }}
   <div class="post-detail-card">

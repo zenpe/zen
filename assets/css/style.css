@@ -5,6 +5,87 @@
   --card-shadow-color: rgba(0, 0, 0, 0.1);
   --link-color: #3498db;
   --link-hover-color: #2980b9;
+
+  --color-white: #fff;
+  --color-light-gray: #f5f5f5;
+  --color-blue-primary: #1976d2;
+  --color-orange-accent: #ff7043;
+  --color-gray-text: #888;
+  --color-light-border: #e3e3e3;
+  --color-dark-text: #222;
+  --color-dark-background: #2c3e50;
+  --color-blue-accent: #3498db;
+  --color-light-blue-bg: #e3f2fd;
+  --color-gray-light: #bdc3c7;
+  --color-gray-medium: #95a5a6;
+  --color-dark-border: #34495e;
+  --color-border-light: #ddd;
+  --color-overlay-dark: rgba(0, 0, 0, 0.5);
+  --color-border-lighter: #eee;
+  --color-light-bg-alt: #f8f9fa;
+  --color-gray-dark: #999;
+  --color-light-hover-bg: #e9ecef;
+  --color-gray-content: #6c757d;
+  --color-blue-link-hover: #0366d6;
+  --color-gray-light-alt: #ccc;
+  --color-gray-meta: #aaa;
+  --color-green-accent: #00c897;
+  --color-gray-dark-alt: #666;
+  --color-gray-meta-alt: #7f8c8d;
+  --color-light-blue-border: #b3d8f6;
+
+  --shadow-light: 0 2px 8px 0 rgba(0,0,0,0.04);
+  --shadow-medium: 0 6px 24px 0 rgba(0,0,0,0.08);
+  --shadow-card-hover: 0 8px 16px rgba(0, 0, 0, 0.12);
+  --shadow-small: 0 2px 6px rgba(0,0,0,0.05);
+  --shadow-timeline-dot: 0 2px 4px rgba(0,0,0,0.1);
+    --color-green-accent: #00c897;
+  --color-gray-dark-alt: #666;
+  --color-gray-meta-alt: #7f8c8d;
+  --color-light-blue-border: #b3d8f6;
+  --color-black: #000;
+  --color-blue-primary-dark: #1565c0;
+  --color-light-gray-alt: #f0f0f0;
+  --color-gray-summary: #555;
+  --color-blue-link-hover-alt: #007bff;
+  --color-light-text: #ecf0f1;
+
+  --shadow-light: 0 2px 8px 0 rgba(0,0,0,0.04);
+  --shadow-medium: 0 6px 24px 0 rgba(0,0,0,0.08);
+  --shadow-card-hover: 0 8px 16px rgba(0, 0, 0, 0.12);
+  --shadow-small: 0 2px 6px rgba(0,0,0,0.05);
+  --shadow-timeline-dot: 0 2px 4px rgba(0,0,0,0.1);
+  --shadow-image: 0 4px 8px 0 rgba(0,0,0,0.1);
+  --shadow-modal: 0 10px 30px rgba(0, 0, 0, 0.2);
+  --shadow-modal-alt: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --shadow-post-detail-card: 0 4px 24px 0 rgba(0,0,0,0.08);
+  --shadow-modal: 0 10px 30px rgba(0, 0, 0, 0.2);
+  --shadow-modal-alt: 0 4px 20px rgba(0, 0, 0, 0.3);
+
+  --border-radius-small: 4px;
+  --border-radius-medium: 8px;
+  --border-radius-large: 12px;
+  --border-radius-xl: 16px;
+  --border-radius-xxl: 24px;
+  --border-radius-circle: 50%;
+  --border-radius-card-compact: 10px;
+  --border-radius-pagination: 6px;
+
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 2.5rem;
+  --spacing-xxl: 3rem;
+
+  --spacing-px-12: 12px;
+  --spacing-px-16: 16px;
+  --spacing-px-18: 18px;
+  --spacing-px-20: 20px;
+  --spacing-px-24: 24px;
+  --spacing-px-30: 30px;
+  --spacing-px-32: 32px;
+  --spacing-px-40: 40px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -15,6 +96,50 @@
     --card-shadow-color: rgba(255, 255, 255, 0.1);
     --link-color: #90caf9;
     --link-hover-color: #bbdefb;
+
+    --color-white: #1e1e1e;
+    --color-light-gray: #2c2c2c;
+    --color-blue-primary: #64b5f6;
+    --color-orange-accent: #ffab91;
+    --color-gray-text: #b0b0b0;
+    --color-light-border: #3a3a3a;
+    --color-dark-text: #f0f0f0;
+    --color-dark-background: #1a1a1a;
+    --color-blue-accent: #90caf9;
+    --color-light-blue-bg: #2a3a4a;
+    --color-gray-light: #808080;
+    --color-gray-medium: #707070;
+    --color-dark-border: #4a4a4a;
+    --color-border-light: #444;
+    --color-overlay-dark: rgba(0, 0, 0, 0.7);
+    --color-border-lighter: #333;
+    --color-light-bg-alt: #282828;
+    --color-gray-dark: #666;
+    --color-light-hover-bg: #333;
+    --color-gray-content: #999;
+    --color-blue-link-hover: #bbdefb;
+    --color-gray-light-alt: #555;
+    --color-gray-meta: #777;
+    --color-green-accent: #4db6ac;
+    --color-gray-dark-alt: #888;
+    --color-gray-meta-alt: #a0a0a0;
+    --color-light-blue-border: #4a6a8a;
+    --color-black: #333;
+    --color-blue-primary-dark: #42a5f5;
+    --color-light-gray-alt: #2a2a2a;
+    --color-gray-summary: #b0b0b0;
+    --color-blue-link-hover-alt: #64b5f6;
+    --color-light-text: #b0b0b0;
+
+    --shadow-light: 0 2px 8px 0 rgba(0,0,0,0.2);
+    --shadow-medium: 0 6px 24px 0 rgba(0,0,0,0.3);
+    --shadow-card-hover: 0 8px 16px rgba(0, 0, 0, 0.4);
+    --shadow-small: 0 2px 6px rgba(0,0,0,0.15);
+    --shadow-timeline-dot: 0 2px 4px rgba(0,0,0,0.2);
+    --shadow-image: 0 4px 8px rgba(0, 0, 0, 0.25);
+    --shadow-modal: 0 10px 30px rgba(0, 0, 0, 0.4);
+    --shadow-modal-alt: 0 4px 20px rgba(0, 0, 0, 0.5);
+    --shadow-post-detail-card: 0 4px 24px 0 rgba(0,0,0,0.3);
   }
 }
 
@@ -42,8 +167,8 @@ body {
 /* Navigation */
 .top-navbar {
     width: 100%;
-    background: #fff;
-    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.06);
+    background: var(--color-white);
+    box-shadow: var(--shadow-light);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -58,18 +183,18 @@ body {
     align-items: center;
     justify-content: space-between;
     height: 64px;
-    padding: 0 32px;
+    padding: 0 var(--spacing-px-32);
     box-sizing: border-box;
 }
 .navbar-left {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: var(--spacing-px-12);
 }
 .navbar-logo {
     font-size: 2rem;
-    border-radius: 50%;
-    background: #f5f5f5;
+    border-radius: var(--border-radius-circle);
+    background: var(--color-light-gray);
     width: 38px;
     height: 38px;
     display: flex;
@@ -79,7 +204,7 @@ body {
 .navbar-title {
     font-size: 1.7rem;
     font-weight: 700;
-    color: #222;
+    color: var(--color-dark-text);
     letter-spacing: 1px;
 }
 .navbar-center nav {
@@ -88,7 +213,7 @@ body {
 }
 .navbar-center ul {
     display: flex;
-    gap: 24px;
+    gap: var(--spacing-px-24);
     list-style: none;
     padding: 0;
     margin: 0;
@@ -100,7 +225,7 @@ body {
 }
 .navbar-center a {
     background: transparent;
-    color: #222;
+    color: var(--color-dark-text);
     font-size: 1.08rem;
     font-weight: 500;
     padding: 6px 18px;
@@ -112,20 +237,20 @@ body {
     z-index: 102; /* 确保链接在菜单项之上 */
 }
 .navbar-center a:hover, .navbar-center a.active, .navbar-center a[aria-current] {
-    background: #f5f5f5;
-    color: #1976d2;
+    background: var(--color-light-gray);
+    color: var(--color-blue-primary);
 }
 .navbar-right {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: var(--spacing-px-16);
     position: relative;
     z-index: 101; /* 确保右侧元素在关闭按钮之上 */
 }
 .navbar-search {
-    background: #f5f5f5;
-    border-radius: 8px;
-    padding: 0 12px;
+    background: var(--color-light-gray);
+    border-radius: var(--border-radius-medium);
+    padding: 0 var(--spacing-px-12);
     display: flex;
     align-items: center;
     margin-right: 8px;
@@ -137,10 +262,10 @@ body {
     font-size: 1rem;
     padding: 8px 0;
     width: 180px;
-    color: #222;
+    color: var(--color-dark-text);
 }
 .navbar-icon {
-    color: #222;
+    color: var(--color-dark-text);
     opacity: 0.85;
     margin-left: 2px;
     display: inline-flex;
@@ -150,8 +275,17 @@ body {
     z-index: 102; /* 确保图标在右侧元素之上 */
 }
 .navbar-icon:hover {
-    color: #1976d2;
+    color: var(--color-blue-primary);
     opacity: 1;
+}
+
+.navbar-close-btn {
+    margin-left: 12px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    line-height: 1;
 }
 
 /* Footer */

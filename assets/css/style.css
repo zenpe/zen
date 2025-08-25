@@ -672,3 +672,9 @@ body {
     margin-top: 0;
   }
 }
+
+.search-highlight {
+    background-color: yellow;
+    font-weight: bold;
+    color: black;
+}

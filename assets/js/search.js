@@ -1,74 +1,65 @@
-// Search functionality with lazy loading of Algolia library
-document.addEventListener('DOMContentLoaded', function() {
-    // Get DOM elements
+
+document.addEventListener('DOMContentLoaded', function () {
     const searchForm = document.getElementById('search-form');
     const searchInput = document.getElementById('search-input');
     const searchOverlay = document.getElementById('search-overlay');
     const searchResults = document.getElementById('search-results');
     const closeSearchBtn = document.getElementById('close-search');
     const navbarCloseBtn = document.getElementById('navbar-close-btn');
-    
-    // Close navbar button
+
     if (navbarCloseBtn) {
-        navbarCloseBtn.addEventListener('click', function(e) {
+        navbarCloseBtn.addEventListener('click', function (e) {
             e.preventDefault();
             const navbar = document.getElementById('main-navbar');
             if (navbar) navbar.style.display = 'none';
         });
     }
-    
-    // Initialize Algolia
-    const appId = window.algoliaConfig ? window.algoliaConfig.appId : '';
-    const apiKey = window.algoliaConfig ? window.algoliaConfig.apiKey : '';
-    const indexName = window.algoliaConfig ? window.algoliaConfig.indexName : '';
-    
-    let searchClient, index;
 
-    // Function to dynamically load Algolia library
-    function loadAlgoliaLibrary() {
+    let index;
+    let documents = [];
+
+    function loadFlexSearchLibrary() {
         return new Promise((resolve, reject) => {
-            if (typeof algoliasearch !== 'undefined') {
-                // Already loaded
+            if (typeof FlexSearch !== 'undefined') {
                 resolve();
                 return;
             }
-
-            // Create script element for Algolia library
             const script = document.createElement('script');
-            script.src = 'https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js';
+            script.src = 'https://cdn.jsdelivr.net/npm/flexsearch@0.7.31/dist/flexsearch.bundle.js';
             script.onload = () => resolve();
-            script.onerror = () => reject(new Error('Failed to load Algolia library'));
+            script.onerror = () => reject(new Error('Failed to load FlexSearch library'));
             document.head.appendChild(script);
         });
     }
 
-    // Initialize Algolia search (called only when needed)
-    async function initializeAlgolia() {
-        if (!appId || !apiKey || !indexName) {
-            console.warn('Algolia configuration is missing');
-            return false;
-        }
-
+    async function initializeFlexSearch() {
         try {
-            await loadAlgoliaLibrary();
-            searchClient = algoliasearch(appId, apiKey);
-            index = searchClient.initIndex(indexName);
+            await loadFlexSearchLibrary();
+            const response = await fetch('/flexsearch.json');
+            documents = await response.json();
+            index = new FlexSearch.Document({
+                document: {
+                    id: "permalink",
+                    index: ["title", "content"],
+                    store: ["title", "excerpt", "permalink", "content"]
+                },
+                tokenize: "full"
+            });
+            documents.forEach(doc => index.add(doc));
             return true;
         } catch (error) {
-            console.error('Failed to initialize Algolia:', error);
+            console.error('Failed to initialize FlexSearch:', error);
             return false;
         }
     }
 
-    // Handle search input for suggestions
     if (searchInput) {
-        let algoliaInitialized = false;
-        
-        searchInput.addEventListener('focus', async function() {
-            // Initialize Algolia on first focus
-            if (!algoliaInitialized) {
-                algoliaInitialized = await initializeAlgolia();
-                if (!algoliaInitialized) {
+        let flexSearchInitialized = false;
+
+        searchInput.addEventListener('focus', async function () {
+            if (!flexSearchInitialized) {
+                flexSearchInitialized = await initializeFlexSearch();
+                if (!flexSearchInitialized) {
                     searchResults.innerHTML = "<p class='no-results'>搜索功能初始化失败</p>";
                     searchOverlay.style.display = 'flex';
                     return;
@@ -76,103 +67,84 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        searchInput.addEventListener('input', async function(e) {
+        searchInput.addEventListener('input', function (e) {
             const term = e.target.value.trim();
             if (term.length > 0) {
-                // Initialize Algolia if not already done
-                if (!algoliaInitialized) {
-                    algoliaInitialized = await initializeAlgolia();
-                    if (!algoliaInitialized) {
-                        searchResults.innerHTML = "<p class='no-results'>搜索功能初始化失败</p>";
-                        searchOverlay.style.display = 'flex';
-                        return;
-                    }
-                }
                 performSearch(term);
             } else {
                 searchOverlay.style.display = 'none';
             }
         });
-        
-        // Close suggestions when clicking outside
-        searchOverlay.addEventListener('click', function(e) {
-            // If clicking on the overlay itself (not its internal elements) or close button, close the overlay
+
+        searchOverlay.addEventListener('click', function (e) {
             if (e.target === searchOverlay) {
                 searchOverlay.style.display = 'none';
             }
         });
-        
-        // Handle close button click event
+
         if (closeSearchBtn) {
-            closeSearchBtn.addEventListener('click', function(e) {
+            closeSearchBtn.addEventListener('click', function (e) {
                 e.preventDefault();
                 searchOverlay.style.display = 'none';
             });
         }
-        
-        // Prevent form submission
-        searchForm.addEventListener('submit', async function(e) {
+
+        searchForm.addEventListener('submit', function (e) {
             e.preventDefault();
             const term = searchInput.value.trim();
             if (term.length > 0) {
-                // Initialize Algolia if not already done
-                if (!algoliaInitialized) {
-                    algoliaInitialized = await initializeAlgolia();
-                    if (!algoliaInitialized) {
-                        searchResults.innerHTML = "<p class='no-results'>搜索功能初始化失败</p>";
-                        searchOverlay.style.display = 'flex';
-                        return;
-                    }
-                }
                 performSearch(term);
             }
         });
     }
-    
-    async function performSearch(term) {
+
+    function performSearch(term) {
         if (!index) return;
-        
-        try {
-            const { hits } = await index.search(term, {
-                hitsPerPage: 6
-            });
-            displayResults(hits);
-            searchOverlay.style.display = 'flex';
-        } catch (e) {
-            console.error("Search error:", e);
-            searchResults.innerHTML = "<p class='no-results'>搜索出现错误，请稍后重试</p>";
-            searchOverlay.style.display = 'flex';
-        }
+        const results = index.search(term, { limit: 6, enrich: true });
+        displayResults(results[0] ? results[0].result : []);
+        searchOverlay.style.display = 'flex';
     }
-    
+
     function displayResults(results) {
         if (results.length === 0) {
             searchResults.innerHTML = "<p class='no-results'>没有找到相关结果</p>";
             return;
         }
-        
+
+        const term = searchInput.value.trim();
+
         const html = results.map((result) => {
-            // Extract URL path for display
-            const url = new URL(result.url, window.location.origin);
+            const doc = result.doc;
+            const url = new URL(doc.permalink, window.location.origin);
             const displayUrl = url.pathname;
-            
+
+            const title = highlight(doc.title, term);
+            const excerpt = highlight(doc.excerpt || (doc.content ? doc.content.substring(0, 120) + '...' : ''), term);
+
             return `
                 <div class="search-result-item">
-                    <h3><a href="${result.url}">${result.title}</a></h3>
-                    <p>${result.excerpt || (result.content ? result.content.substring(0, 120) + '...' : '')}</p>
+                    <h3><a href="${doc.permalink}">${title}</a></h3>
+                    <p>${excerpt}</p>
                     <span class="search-result-url">${displayUrl}</span>
                 </div>
             `;
         }).join('');
-        
+
         searchResults.innerHTML = html;
-        
-        // Add click handlers to links to close overlay when navigating
+
         const links = searchResults.querySelectorAll('a');
         links.forEach(link => {
             link.addEventListener('click', () => {
                 searchOverlay.style.display = 'none';
             });
         });
+    }
+
+    function highlight(text, term) {
+        if (!text || !term) {
+            return text;
+        }
+        const regex = new RegExp(`(${term})`, 'gi');
+        return text.replace(regex, '<strong class="search-highlight">$1</strong>');
     }
 });

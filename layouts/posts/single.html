@@ -31,6 +31,9 @@
       {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
     </div>
   </div>
+  <div class="post-detail-card">
+    {{ partial "waline.html" . }}
+  </div>
   
   <script>
     // 页面加载完成后显示访问量

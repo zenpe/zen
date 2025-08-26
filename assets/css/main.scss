@@ -801,3 +801,14 @@ a:hover {
     margin-top: 0;
   }
 }
+
+.search-highlight {
+    background-color: yellow;
+    font-weight: bold;
+    color: black;
+}
+
+#dark-mode-toggle {
+    cursor: pointer;
+    margin-left: 8px; // Adjust as needed for spacing
+}

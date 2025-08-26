@@ -1,9 +1,3 @@
-{{- $css := resources.Match "css/*.css" | resources.Concat "css/bundle.css" -}}
-
-{{- if hugo.IsDevelopment }}
-  <link rel="stylesheet" href="{{ $css.RelPermalink }}">
-{{- else }}
-  {{- with $css | minify | fingerprint }}
-    <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
-  {{- end }}
-{{- end }}
+{{- $options := (dict "targetPath" "css/style.css" "outputStyle" (cond hugo.IsDevelopment "expanded" "compressed")) -}}
+{{- $style := resources.Get "css/style.scss" | toCSS $options | fingerprint -}}
+<link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">

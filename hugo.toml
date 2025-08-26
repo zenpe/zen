@@ -1,31 +1,3 @@
-baseURL = 'https://example.org/'
-languageCode = 'en-US'
-title = 'My New Hugo Site'
-
-[menus]
-  [[menus.main]]
-    name = 'Home'
-    pageRef = '/'
-    weight = 10
-
-  [[menus.main]]
-    name = 'Posts'
-    pageRef = '/posts'
-    weight = 20
-
-  [[menus.main]]
-    name = 'Tags'
-    pageRef = '/tags'
-    weight = 30
-
-  [[menu.main]]
-    name = 'Categories'
-    pageRef = '/categories/'
-    weight = 40
-
-[permalinks]
-  posts = "/blog/:year/:month/:slug/"  
-
 [module]
   [module.hugoVersion]
     extended = false

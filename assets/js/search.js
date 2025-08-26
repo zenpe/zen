@@ -1,5 +1,15 @@
 
 document.addEventListener('DOMContentLoaded', function () {
+    // Debounce function
+    const debounce = (func, delay) => {
+        let timeout;
+        return function(...args) {
+            const context = this;
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(context, args), delay);
+        };
+    };
+
     const searchForm = document.getElementById('search-form');
     const searchInput = document.getElementById('search-input');
     const searchOverlay = document.getElementById('search-overlay');
@@ -53,8 +63,24 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    const navbarIcon = document.querySelector('.navbar-icon'); // Get the search icon
+
     if (searchInput) {
         let flexSearchInitialized = false;
+
+        // Add event listener for the search icon
+        if (navbarIcon) {
+            navbarIcon.addEventListener('click', function() {
+                const term = searchInput.value.trim();
+                if (term.length > 0) {
+                    performSearch(term); // Perform search on icon click
+                } else {
+                    // If input is empty, just show the overlay for user to type
+                    searchOverlay.style.display = 'flex';
+                }
+                searchInput.focus(); // Always focus the input
+            });
+        }
 
         searchInput.addEventListener('focus', async function () {
             if (!flexSearchInitialized) {
@@ -67,12 +93,12 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
+        const debouncedPerformSearch = debounce(performSearch, 300); // Debounce with 300ms
+
         searchInput.addEventListener('input', function (e) {
             const term = e.target.value.trim();
             if (term.length > 0) {
-                performSearch(term);
-            } else {
-                searchOverlay.style.display = 'none';
+                debouncedPerformSearch(term);
             }
         });
 
@@ -91,9 +117,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         searchForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            const term = searchInput.value.trim();
+            const term = e.target.value.trim();
             if (term.length > 0) {
-                performSearch(term);
+                performSearch(term); // No debounce on submit to ensure immediate search
             }
         });
     }

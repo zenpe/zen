@@ -1,8 +1,10 @@
 <header class="top-navbar" id="main-navbar">
     <div class="navbar-inner">
         <div class="navbar-left">
-            <span class="navbar-logo">🐶</span>
-            <span class="navbar-title">一亩三分地</span>
+            <a href="/" class="navbar-brand">
+                <span class="navbar-logo">🐶</span>
+                <span class="navbar-title">一亩三分地</span>
+            </a>
         </div>
         <div class="navbar-center">
             {{- partial "menu.html" (dict "menuID" "main" "page" .) -}}

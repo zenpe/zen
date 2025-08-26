@@ -8,12 +8,18 @@
     <h1 class="post-detail-title">{{ .Title }}</h1>
     <div class="post-detail-meta">
       <span class="meta-item"><span class="meta-icon">🗓️</span> {{ .Date.Format "2006-01-02" }}</span>
-      {{ with .Params.categories }} 
-      <span class="meta-item"><span class="meta-icon">📁</span> {{ delimit . ", " }}</span>
+      {{ with .Params.categories }}
+      <span class="meta-item"><span class="meta-icon">📁</span>
+        {{ range $index, $category := . }}
+          {{ if gt $index 0 }}, {{ end }}<a href="{{ "/categories/" | relURL }}{{ . | urlize }}">{{ . }}</a>
+        {{ end }}
+      </span>
       {{ end }}
       {{ with .Params.author }} 
       <span class="meta-item"><span class="meta-icon">✍️</span> {{ . }}</span>
       {{ end }}
+      <span class="meta-item"><span class="meta-icon">📝</span> {{ .WordCount }} 字</span>
+      <span class="meta-item"><span class="meta-icon">⏱️</span> 约 {{ .ReadingTime }} 分钟</span>
       <span class="meta-item" id="page-views">
         <span class="meta-icon">👁️</span>
         <span class="meta-text">阅读量: 

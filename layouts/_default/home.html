@@ -18,16 +18,16 @@
           <a href="{{ .RelPermalink }}">{{ .Title }}</a>
         </h2>
         <div class="post-meta">
-          <span class="meta-item">发表于 {{ .Date.Format "2006-01-02" }}</span>
+          <span class="meta-item">{{ .Date.Format "2006-01-02" }}</span>
           {{ with .Params.categories }}
-          <span class="meta-divider">|</span>
+          <span class="meta-divider">·</span>
           <span class="meta-item">
             {{ range . }}
               <a href="/categories/{{ . | urlize }}">{{ . }}</a>
             {{ end }}
           </span>
           {{ end }}
-          <span class="meta-divider">|</span>
+          <span class="meta-divider">·</span>
           <span class="meta-item">
             {{ $wordCount := .WordCount }}
             {{ $readingTime := .ReadingTime }}

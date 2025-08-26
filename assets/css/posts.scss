@@ -55,7 +55,7 @@
   font-size: 0.8rem; /* 减小元信息字号 */
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-md); /* 增加元信息间距 */
+  gap: 0.5rem; /* 增加元信息间距 */
   text-align: left;
 }
 
@@ -157,12 +157,12 @@
 
 @media (max-width: 768px) {
   .posts-container {
-    padding: 0 var(--spacing-sm);
+    padding: 0;
     margin: var(--spacing-sm) auto;
   }
   
   .post-card {
-    padding: 1.25rem;
+    padding: var(--spacing-sm);
     margin-bottom: var(--spacing-md);
   }
   
@@ -172,7 +172,12 @@
   
   .post-meta {
     font-size: 0.75rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .post-content .post-body {
+    font-size: 0.9rem;
+    line-height: 1.8;
   }
 
   .post-summary {

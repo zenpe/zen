@@ -307,6 +307,7 @@
     margin-bottom: 1.5em;
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 1em;
 }
 .post-detail-content {
@@ -549,7 +550,7 @@ a:hover {
 
 .post-content {
   flex: 1;
-  padding-left: var(--spacing-lg);
+  padding-left: 0;
 }
 
 .post-title a {
@@ -792,10 +793,14 @@ a:hover {
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
-    padding: 0 1rem;
+    padding: var(--spacing-lg) var(--spacing-xs) 0;
   }
 
-  main,
+  .container > main {
+    width: 100%;
+    margin-top: var(--spacing-lg);
+  }
+
   aside {
     width: 100%;
     margin-top: 0;

@@ -11,6 +11,10 @@
 }
 
 @media (max-width: 768px) {
+  .post-content {
+    padding-left: 0;
+  }
+
   .article-card {
     flex-direction: column;
   }
@@ -122,5 +126,11 @@
   
   .search-result-item h3 {
       font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-title {
+    display: none;
   }
 }

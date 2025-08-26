@@ -43,3 +43,39 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// Smooth scrolling for archive links
+document.addEventListener('DOMContentLoaded', () => {
+    const smoothScrollTo = (targetId) => {
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    };
+
+    // Handle hash in URL on page load
+    if (window.location.hash) {
+        const targetId = window.location.hash.substring(1); // Remove the '#'
+        smoothScrollTo(targetId);
+    }
+
+    // Handle clicks on sidebar archive links
+    const archiveLinks = document.querySelectorAll('.sidebar-section.archive-links a');
+    archiveLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+            const href = link.getAttribute('href');
+            const url = new URL(href, window.location.origin);
+
+            // Only handle if the link is to the current archive page with a hash
+            if (url.pathname === window.location.pathname && url.hash) {
+                event.preventDefault(); // Prevent default jump
+                const targetId = url.hash.substring(1); // Remove the '#'
+                smoothScrollTo(targetId);
+            } else if (url.pathname !== window.location.pathname && url.hash) {
+                // If clicking from a different page, let the browser navigate,
+                // and the page load hash handler will take over.
+                // No explicit action needed here other than not preventing default.
+            }
+        });
+    });
+});

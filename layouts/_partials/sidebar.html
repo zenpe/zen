@@ -22,7 +22,7 @@
         <h4><i class="fas fa-archive"></i> 归档</h4>
         <ul>
             {{ range site.RegularPages.GroupByDate "2006-01" }}
-            <li><a href="/archive/">{{ .Key }} ({{ len .Pages }})</a></li>
+            <li><a href="{{ "/archive/" | relURL }}#{{ .Key }}">{{ .Key }} ({{ len .Pages }})</a></li>
             {{ end }}
         </ul>
     </div>

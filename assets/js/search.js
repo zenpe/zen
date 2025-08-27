@@ -49,9 +49,9 @@ document.addEventListener('DOMContentLoaded', function () {
             documents = await response.json();
             index = new FlexSearch.Document({
                 document: {
-                    id: "permalink",
+                    id: "url",
                     index: ["title", "content"],
-                    store: ["title", "excerpt", "permalink", "content"]
+                    store: ["title", "excerpt", "url", "content"]
                 },
                 tokenize: "full"
             });
@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const html = results.map((result) => {
             const doc = result.doc;
-            const url = new URL(doc.permalink, window.location.origin);
+            const url = new URL(doc.url, window.location.origin);
             const displayUrl = url.pathname;
 
             const title = highlight(doc.title, term);
@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             return `
                 <div class="search-result-item">
-                    <h3><a href="${doc.permalink}">${title}</a></h3>
+                    <h3><a href="${doc.url}">${title}</a></h3>
                     <p>${excerpt}</p>
                     <span class="search-result-url">${displayUrl}</span>
                 </div>

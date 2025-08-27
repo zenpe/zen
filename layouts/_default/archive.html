@@ -9,7 +9,7 @@
             <li class="archive-item">
               <a href="{{ .Permalink }}" class="archive-link">{{ .Title }}</a>
               <div class="post-meta">
-                <span class="meta-item">{{ .Date.Format "01-02" }}</span>
+                <span class="meta-item">{{ .Date.Format "2006-01-02" }}</span>
                 {{ with .Params.categories }}
                 <span class="meta-divider">·</span>
                 <span class="meta-item">

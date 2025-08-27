@@ -7,19 +7,25 @@
         <ul class="archive-list">
           {{ range .Pages }}
             <li class="archive-item">
-              <span class="archive-date">{{ .Date.Format "01-02" }}</span>
               <a href="{{ .Permalink }}" class="archive-link">{{ .Title }}</a>
-              <span class="archive-meta">
-                <span class="archive-categories">
-                  {{ range .Params.categories }}
-                    <span class="archive-category">{{ . }}</span>
+              <div class="post-meta">
+                <span class="meta-item">{{ .Date.Format "01-02" }}</span>
+                {{ with .Params.categories }}
+                <span class="meta-divider">·</span>
+                <span class="meta-item">
+                  {{ range . }}
+                    <a href="/categories/{{ . | urlize }}">{{ . }}</a>
                   {{ end }}
                 </span>
-                <span class="archive-stats">
-                  <span class="archive-word-count">{{ .WordCount }} 字</span>
-                  <span class="archive-reading-time">{{ .ReadingTime }} 分钟</span>
+                {{ end }}
+                <span class="meta-divider">·</span>
+                <span class="meta-item">
+                  <span class="post-stats">
+                    <span class="word-count">{{ .WordCount }} 字</span>
+                    <span class="reading-time">约 {{ .ReadingTime }} 分钟</span>
+                  </span>
                 </span>
-              </span>
+              </div>
             </li>
           {{ end }}
         </ul>

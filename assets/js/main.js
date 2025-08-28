@@ -37,11 +37,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const archiveLinks = document.querySelectorAll('.sidebar .card a[href*="/archive/#"]');
         if (archiveLinks.length === 0) return;
 
+        // Dynamically determine the correct, language-specific path for the archive JSON file
+        // by looking at the first link found.
+        const firstLinkHref = archiveLinks[0].getAttribute('href');
+        const archivePagePath = firstLinkHref.substring(0, firstLinkHref.indexOf('#'));
+        const jsonPath = `${archivePagePath}/archive-month.json`;
+
         // On page load, if there's a hash on an archive page, try to scroll to it.
-        // This handles the case after redirection to the correct paginated page.
-        if (window.location.pathname.startsWith('/archive/') && window.location.hash) {
+        if (window.location.pathname.includes('/archive/') && window.location.hash) {
             const targetId = decodeURIComponent(window.location.hash.substring(1));
-            // Use a timeout to allow the page to render before scrolling
             setTimeout(() => {
                 const targetElement = document.getElementById(targetId);
                 if (targetElement) {
@@ -50,9 +54,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 100);
         }
 
-        fetch('/archive/archive-month.json')
+        fetch(jsonPath) // Use the language-specific path
             .then(response => {
-                if (!response.ok) throw new Error('Failed to load /archive.json');
+                if (!response.ok) throw new Error(`Failed to load ${jsonPath}`);
                 return response.json();
             })
             .then(monthMap => {
@@ -61,19 +65,22 @@ document.addEventListener('DOMContentLoaded', () => {
                         const href = this.getAttribute('href');
                         const month = href.split('#')[1];
 
+                        // Determine the base URL for the current language's archive from the link itself
+                        const archiveBaseUrl = href.substring(0, href.indexOf('/archive/')) + '/archive/';
+
                         if (month && monthMap[month]) {
                             event.preventDefault(); // We have a custom navigation logic
 
                             const pageNum = monthMap[month];
-                            let targetUrl = `/archive/`;
+                            let targetUrl = archiveBaseUrl;
                             if (pageNum > 1) {
-                                targetUrl = `/archive/page/${pageNum}/`;
+                                targetUrl = `${archiveBaseUrl}page/${pageNum}/`;
                             }
                             
                             const finalUrl = targetUrl + '#' + month;
 
                             // If we are already on the destination URL, just scroll. Otherwise, navigate.
-                            if (window.location.pathname === targetUrl && window.location.hash === '#' + month) {
+                            if (window.location.href.endsWith(finalUrl)) {
                                 const targetElement = document.getElementById(month);
                                 if (targetElement) {
                                     targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });

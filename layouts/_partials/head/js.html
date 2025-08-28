@@ -1,9 +1,9 @@
 {{- $js := resources.Match "js/*.js" | resources.Concat "js/bundle.js" -}}
 
 {{- if hugo.IsDevelopment }}
-  <script src="{{ $js.RelPermalink }}"></script>
+  <script src="{{ $js.RelPermalink }}" data-lang="{{ .Site.Language.Lang }}"></script>
 {{- else }}
   {{- with $js | js.Build (dict "minify" true) | fingerprint }}
-    <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+    <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous" data-lang="{{ .Site.Language.Lang }}"></script>
   {{- end }}
 {{- end }}

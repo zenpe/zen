@@ -45,6 +45,9 @@
   --shadow-card-hover: 0 8px 16px rgba(0, 0, 0, 0.12);
   --shadow-small: 0 2px 6px rgba(0,0,0,0.05);
   --shadow-timeline-dot: 0 2px 4px rgba(0,0,0,0.1);
+  --shadow-post-detail-card: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-post-detail-card: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-post-detail-card: 0 4px 12px rgba(0, 0, 0, 0.1);
     
 
   --border-radius-small: 4px;
@@ -71,6 +74,9 @@
   --spacing-px-30: 30px;
   --spacing-px-32: 32px;
   --spacing-px-40: 40px;
+
+  --entry-bg: var(--card-background-color, #fff);
+  --secondary-text-color: var(--color-gray-content, #6c757d);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -105,6 +111,9 @@
     --color-blue-link-hover: #bbdefb;
     --color-gray-light-alt: #555;
     --color-gray-meta: #777;
+
+    --entry-bg: var(--card-background-color, #1e1e1e);
+    --secondary-text-color: var(--color-gray-content, #999);
     
   }
 }
@@ -140,6 +149,9 @@ html.dark-mode {
   --color-blue-link-hover: #bbdefb;
   --color-gray-light-alt: #555;
   --color-gray-meta: #777;
+
+  --entry-bg: var(--card-background-color, #1e1e1e);
+  --secondary-text-color: var(--color-gray-content, #999);
   
 }
 
@@ -282,6 +294,48 @@ body {
     z-index: 102; /* 确保图标在右侧元素之上 */
     cursor: pointer; /* Add cursor pointer to indicate it's clickable */
 }
+
+.language-switcher {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.language-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--color-white);
+    border: 1px solid var(--color-light-border);
+    border-radius: var(--border-radius-small);
+    box-shadow: var(--shadow-medium);
+    z-index: 1000;
+    min-width: 120px;
+    padding: 8px 0;
+}
+
+.language-switcher:hover .language-dropdown {
+    display: block;
+}
+
+.language-dropdown a {
+    display: block;
+    padding: 8px 16px;
+    color: var(--color-dark-text);
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.language-dropdown a:hover {
+    background-color: var(--color-light-gray);
+}
+
+.language-dropdown a.active {
+    background-color: var(--color-blue-primary);
+    color: var(--color-white);
+}
+
 .navbar-icon:hover {
     color: var(--color-blue-primary);
     opacity: 1;

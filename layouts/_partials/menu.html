@@ -21,7 +21,17 @@ Renders a menu for the given menu ID.
 {{- define "_partials/inline/menu/walk.html" }}
   {{- $page := .page }}
   {{- range .menuEntries }}
-    {{- $attrs := dict "href" .URL }}
+    {{- $url := .URL }}
+    {{- with .Page }}
+      {{- $url = .RelPermalink }}
+    {{- else }}
+      {{- if hasPrefix .URL "/" }}
+        {{- $url = .URL | relLangURL }}
+      {{- else if eq .Identifier "archive" }}
+        {{- $url = "/archive/" | relLangURL }}
+      {{- end }}
+    {{- end }}
+    {{- $attrs := dict "href" $url }}
     {{- if $page.IsMenuCurrent .Menu . }}
       {{- $attrs = merge $attrs (dict "class" "active" "aria-current" "page") }}
     {{- else if $page.HasMenuCurrent .Menu .}}
@@ -51,3 +61,4 @@ Renders a menu for the given menu ID.
     </li>
   {{- end }}
 {{- end }}
+

@@ -1,8 +1,9 @@
 {{ define "main" }}
-<div class="posts-container">
+{{ $layout := .Site.Params.defaultPostLayout | default "grid" }}
+<div class="posts-container{{ if eq $layout "list" }} list-layout{{ end }}">
   {{ $paginator := .Paginate (where .Site.RegularPages "Type" "posts") }}
   {{ range $paginator.Pages }}
-  <article class="post-card {{ if .Params.featured_image }}has-background-image{{ end }}">
+  <article class="post-card">
     <!-- 图片部分 -->
     {{ if .Params.featured_image }}
     <div class="post-image">
@@ -13,48 +14,44 @@
     {{ end }}
     <!-- 文字内容部分 -->
     <div class="post-content-wrapper">
-      <div class="post-content">
-        <h2 class="post-title">
-          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      <h2 class="post-title">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
         </h2>
-        <div class="post-meta">
-          <span class="meta-item">{{ .Date.Format "2006-01-02" }}</span>
-          {{ with .Params.categories }}
-          <span class="meta-divider">·</span>
-          <span class="meta-item">
-            {{ range . }}
-              <a href="{{ "/categories/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
-            {{ end }}
-          </span>
+      <div class="post-meta">
+        <span class="meta-item">{{ .Date.Format "2006-01-02" }}</span>
+        {{ with .Params.categories }}
+        <span class="meta-item">
+          {{ range . }}
+            <a href="{{ "/categories/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
           {{ end }}
-          <span class="meta-divider">·</span>
-          <span class="meta-item">
-            {{ $wordCount := .WordCount }}
-            {{ $readingTime := .ReadingTime }}
-            <span class="post-stats">
-              <span class="word-count">{{ T "wordCount" $wordCount }}</span>
-              <span class="reading-time">{{ T "readingTime" $readingTime }}</span>
-            </span>
+        </span>
+        {{ end }}
+        <span class="meta-item">
+          <span class="post-stats">
+            <span class="word-count">{{ T "wordCount" .WordCount }}</span>
+            <span class="reading-time">{{ T "readingTime" .ReadingTime }}</span>
           </span>
-        </div>
+        </span>
+      </div>
+      <div class="post-content">
         <div class="post-body">
-          {{ .Content | plainify | truncate 300 }} <!-- 显示正文内容并截断，去除格式 -->
+          {{ .Content | plainify | truncate 200 }}
         </div>
       </div>
     </div>
   </article>
   {{ end }}
+</div>
 
-  {{ if gt $paginator.TotalPages 1 }}
-  <div class="pagination">
-    {{ if $paginator.HasPrev }}
-    <a href="{{ $paginator.Prev.URL }}" class="prev">{{ T "previous" }}</a>
-    {{ end }}
-    <div class="page-number">{{ $paginator.PageNumber }} / {{ $paginator.TotalPages }}</div>
-    {{ if $paginator.HasNext }}
-    <a href="{{ $paginator.Next.URL }}" class="next">{{ T "next" }}</a>
-    {{ end }}
-  </div>
+{{ if gt $paginator.TotalPages 1 }}
+<div class="pagination">
+  {{ if $paginator.HasPrev }}
+  <a href="{{ $paginator.Prev.URL }}" class="prev">{{ T "previous" }}</a>
+  {{ end }}
+  <div class="page-number">{{ $paginator.PageNumber }} / {{ $paginator.TotalPages }}</div>
+  {{ if $paginator.HasNext }}
+  <a href="{{ $paginator.Next.URL }}" class="next">{{ T "next" }}</a>
   {{ end }}
 </div>
+{{ end }}
 {{ end }}

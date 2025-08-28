@@ -95,3 +95,9 @@ other = "切换深色模式"
 
 [closeNavbar]
 other = "关闭导航栏"
+
+[switchToListLayout]
+other = "切换到列表布局"
+
+[switchToGridLayout]
+other = "切换到网格布局"

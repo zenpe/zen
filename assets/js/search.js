@@ -45,7 +45,22 @@ document.addEventListener('DOMContentLoaded', function () {
     async function initializeFlexSearch() {
         try {
             await loadFlexSearchLibrary();
-            const response = await fetch('/flexsearch.json');
+
+            const htmlTag = document.documentElement;
+            const lang = htmlTag.lang;
+            const defaultLang = 'zh'; // from hugo.toml
+
+            const isDefaultLang = (lang === defaultLang);
+            const defaultContentInSubdir = false; // from hugo.toml
+
+            let indexPath;
+            if (isDefaultLang && !defaultContentInSubdir) {
+                indexPath = '/flexsearch.json';
+            } else {
+                indexPath = `/${lang}/flexsearch.json`;
+            }
+
+            const response = await fetch(indexPath);
             documents = await response.json();
             index = new FlexSearch.Document({
                 document: {

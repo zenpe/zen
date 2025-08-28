@@ -95,3 +95,9 @@ other = "Toggle dark mode"
 
 [closeNavbar]
 other = "Close navigation bar"
+
+[switchToListLayout]
+other = "Switch to List Layout"
+
+[switchToGridLayout]
+other = "Switch to Grid Layout"

@@ -1,5 +1,15 @@
-{{- $.Scratch.Add "index" slice -}}
-{{- range .Site.RegularPages -}}
-    {{- $.Scratch.Add "index" (dict "title" .Title "tags" .Params.tags "url" .Permalink "content" .Plain "excerpt" .Summary) -}}
+{{- $pages := where (where .Site.Pages "Lang" .Site.Language.Lang) "Kind" "in" (slice "page" "section") -}}
+{{- $searchablePages := slice -}}
+{{- range $pages -}}
+    {{- if and .Content (ne .Layout "archives") (ne .Layout "search") -}}
+        {{- $searchablePages = $searchablePages | append . -}}
+    {{- end -}}
 {{- end -}}
-{{- $.Scratch.Get "index" | jsonify -}}
+
+{{- $items := slice -}}
+{{- range $searchablePages -}}
+    {{- $item := dict "url" .RelPermalink "title" .Title "tags" .Params.tags "description" .Description "content" .Plain -}}
+    {{- $items = $items | append $item -}}
+{{- end -}}
+
+{{- $items | jsonify -}}

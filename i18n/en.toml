@@ -60,6 +60,9 @@ other = "Visitor Count"
 [pageViewCount]
 other = "Page View Count"
 
+[sitePageViewCount]
+other = "Site Page View Count"
+
 [lastUpdated]
 other = "Last Updated"
 

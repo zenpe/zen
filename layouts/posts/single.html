@@ -20,15 +20,12 @@
       {{ with .Params.author }} 
       <span class="meta-item"><span class="meta-icon">✍️</span> {{ . }}</span>
       {{ end }}
-      <span class="meta-item"><span class="meta-icon">📝</span> {{ .WordCount }} {{ T "wordCount" .WordCount }}</span>
+      <span class="meta-item"><span class="meta-icon">📝</span> {{ T "wordCount" .WordCount }}</span>
       <span class="meta-item"><span class="meta-icon">⏱️</span> {{ T "readingTime" .ReadingTime }}</span>
       <span class="meta-item" id="page-views">
         <span class="meta-icon">👁️</span>
         <span class="meta-text">{{ T "pageViewCount" }}: 
           <span id="busuanzi_value_page_pv">-</span>
-        </span>
-        <span class="loading-dots">
-          <span>.</span><span>.</span><span>.</span>
         </span>
       </span>
     </div>

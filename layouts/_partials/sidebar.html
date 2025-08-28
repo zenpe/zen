@@ -32,7 +32,7 @@
         <ul>
             <li>{{ T "articleCount" }}: {{ len (where site.RegularPages "Type" "in" site.Params.mainSections) }}</li>
             <li>{{ T "visitorCount" }}: <span id="busuanzi_container_site_uv" style="display:none"><span id="busuanzi_value_site_uv"></span></span></li>
-            <li>{{ T "pageViewCount" }}: <span id="busuanzi_container_site_pv" style="display:none"><span id="busuanzi_value_site_pv"></span></span></li>
+            <li>{{ T "sitePageViewCount" }}: <span id="busuanzi_container_site_pv" style="display:none"><span id="busuanzi_value_site_pv"></span></span></li>
             <li>{{ T "lastUpdated" }}: {{ site.Lastmod.Format "2006-01-02" }}</li>
         </ul>
     </div>

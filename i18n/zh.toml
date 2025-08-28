@@ -58,7 +58,10 @@ other = "文章数目"
 other = "本站访客数"
 
 [pageViewCount]
-other = "本站总访问量"
+other = "访问量"
+
+[sitePageViewCount]
+other = "站点访问量"
 
 [lastUpdated]
 other = "最后更新时间"

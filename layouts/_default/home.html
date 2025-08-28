@@ -23,7 +23,7 @@
           <span class="meta-divider">·</span>
           <span class="meta-item">
             {{ range . }}
-              <a href="/categories/{{ . | urlize }}">{{ . }}</a>
+              <a href="{{ "/categories/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
             {{ end }}
           </span>
           {{ end }}
@@ -32,8 +32,8 @@
             {{ $wordCount := .WordCount }}
             {{ $readingTime := .ReadingTime }}
             <span class="post-stats">
-              <span class="word-count">{{ $wordCount }} 字</span>
-              <span class="reading-time">约 {{ $readingTime }} 分钟</span>
+              <span class="word-count">{{ T "wordCount" $wordCount }}</span>
+              <span class="reading-time">{{ T "readingTime" $readingTime }}</span>
             </span>
           </span>
         </div>
@@ -48,11 +48,11 @@
   {{ if gt $paginator.TotalPages 1 }}
   <div class="pagination">
     {{ if $paginator.HasPrev }}
-    <a href="{{ $paginator.Prev.URL }}" class="prev">上一页</a>
+    <a href="{{ $paginator.Prev.URL }}" class="prev">{{ T "previous" }}</a>
     {{ end }}
     <div class="page-number">{{ $paginator.PageNumber }} / {{ $paginator.TotalPages }}</div>
     {{ if $paginator.HasNext }}
-    <a href="{{ $paginator.Next.URL }}" class="next">下一页</a>
+    <a href="{{ $paginator.Next.URL }}" class="next">{{ T "next" }}</a>
     {{ end }}
   </div>
   {{ end }}

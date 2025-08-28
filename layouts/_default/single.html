@@ -24,7 +24,7 @@
       <span>🗓️ {{ .Date.Format "2006-01-02" }}</span>
       {{ with .Params.categories }} | <span>📁 {{ delimit . ", " }}</span>{{ end }}
       {{ with .Params.author }} | <span>✍️ {{ . }}</span>{{ end }}
-      | <span>👁️ <span id="busuanzi_value_page_pv">-</span> 次阅读</span>
+      | <span>👁️ <span id="busuanzi_value_page_pv">-</span> {{ T "pageViewCount" }}</span>
     </div>
     <div class="post-detail-content">
       {{ .Content }}

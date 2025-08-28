@@ -32,6 +32,8 @@ Renders a menu for the given menu ID.
       {{- with T . }}
         {{- $name = . }}
       {{- end }}
+    {{- else }}
+      {{- $name = T .Name }}
     {{- end }}
     <li>
       <a

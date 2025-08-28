@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!flexSearchInitialized) {
                 flexSearchInitialized = await initializeFlexSearch();
                 if (!flexSearchInitialized) {
-                    searchResults.innerHTML = "<p class='no-results'>搜索功能初始化失败</p>";
+                    searchResults.innerHTML = `<p class='no-results'>${i18next.t('searchInitFailed')}</p>`;
                     searchOverlay.style.display = 'flex';
                     return;
                 }
@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function displayResults(results) {
         if (results.length === 0) {
-            searchResults.innerHTML = "<p class='no-results'>没有找到相关结果</p>";
+            searchResults.innerHTML = `<p class='no-results'>${i18next.t('noResults')}</p>`;
             return;
         }
 

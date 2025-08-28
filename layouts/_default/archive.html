@@ -10,22 +10,22 @@
         <ul class="archive-list">
           {{ range .Pages }}
             <li class="archive-item">
-              <a href="{{ .Permalink }}" class="archive-link">{{ .Title }}</a>
+              <a href="{{ .RelPermalink }}" class="archive-link">{{ .Title }}</a>
               <div class="post-meta">
                 <span class="meta-item">{{ .Date.Format "2006-01-02" }}</span>
                 {{ with .Params.categories }}
                 <span class="meta-divider">·</span>
                 <span class="meta-item">
                   {{ range . }}
-                    <a href="/categories/{{ . | urlize }}">{{ . }}</a>
+                    <a href="{{ "/categories/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
                   {{ end }}
                 </span>
                 {{ end }}
                 <span class="meta-divider">·</span>
                 <span class="meta-item">
                   <span class="post-stats">
-                    <span class="word-count">{{ .WordCount }} 字</span>
-                    <span class="reading-time">约 {{ .ReadingTime }} 分钟</span>
+                    <span class="word-count">{{ T "wordCount" .WordCount }}</span>
+                    <span class="reading-time">{{ T "readingTime" .ReadingTime }}</span>
                   </span>
                 </span>
               </div>
@@ -39,11 +39,11 @@
     {{ if gt $paginator.TotalPages 1 }}
     <div class="pagination">
       {{ if $paginator.HasPrev }}
-      <a href="{{ $paginator.Prev.URL }}" class="prev">上一页</a>
+      <a href="{{ $paginator.Prev.URL }}" class="prev">{{ T "previous" }}</a>
       {{ end }}
       <div class="page-number">{{ $paginator.PageNumber }} / {{ $paginator.TotalPages }}</div>
       {{ if $paginator.HasNext }}
-      <a href="{{ $paginator.Next.URL }}" class="next">下一页</a>
+      <a href="{{ $paginator.Next.URL }}" class="next">{{ T "next" }}</a>
       {{ end }}
     </div>
     {{ end }}

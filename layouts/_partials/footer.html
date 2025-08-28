@@ -2,26 +2,26 @@
   <div class="footer-container">
     <div class="footer-links">
       <div class="footer-section">
-        <h3 class="footer-title">友情链接</h3>
+        <h3 class="footer-title">{{ T "friendLinks" }}</h3>
         <ul class="friend-links">
-          {{ range .Site.Params.friendshipLinks }}
+          {{ range .Site.Language.Params.friendshipLinks }}
           <li><a href="{{ .url }}" target="_blank" rel="noopener">{{ .name }}</a></li>
           {{ end }}
         </ul>
       </div>
       
       <div class="footer-section">
-        <h3 class="footer-title">更多</h3>
+        <h3 class="footer-title">{{ T "more" }}</h3>
         <ul class="footer-menu">
-          <li><a href="/archive/">归档</a></li>
-          <li><a href="/sitemap.xml">站点地图</a></li>
+          <li><a href="{{ "/archive/" | relLangURL }}">{{ T "archive" }}</a></li>
+          <li><a href="{{ "/sitemap.xml" | relLangURL }}">{{ T "sitemap" }}</a></li>
         </ul>
       </div>
     </div>
     
     <div class="footer-bottom">
-      <p>&copy; {{ now.Year }} <a href="{{ site.BaseURL }}">{{ site.Title }}</a>. 保留所有权利.</p>
-      <p class="footer-powered-by">基于 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建</p>
+      <p>&copy; {{ now.Year }} <a href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a>. {{ T "allRightsReserved" }}</p>
+      <p class="footer-powered-by">{{ T "poweredBy" }} <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a></p>
     </div>
   </div>
 </footer>

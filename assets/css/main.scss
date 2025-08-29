@@ -271,13 +271,19 @@
 }
 /* 文章详情页样式 */
 .post-featured-image-card {
-    background: var(--color-white);
+    background: var(--card-background-color);
     border-radius: var(--border-radius-large);
-    box-shadow: var(--shadow-post-detail-card);
+    box-shadow: 0 4px 12px var(--card-shadow-color);
     padding: var(--spacing-px-20);
     max-width: 800px;
     margin: 0 auto var(--spacing-px-32) auto;
     position: relative;
+    transition: all 0.3s ease;
+}
+
+.post-featured-image-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-card-hover);
 }
 
 .featured-image-container {
@@ -317,14 +323,63 @@
 }
 
 .post-detail-card {
-    background: var(--color-white);
+    background: var(--card-background-color);
     border-radius: var(--border-radius-large);
-    box-shadow: var(--shadow-post-detail-card);
+    box-shadow: 0 4px 12px var(--card-shadow-color);
     padding: var(--spacing-px-40) 36px 36px 36px;
-    max-width: 800px; /* 修改最大宽度，与首页文章容器保持一致 */
-    margin: 0 auto var(--spacing-px-40) auto; /* 修改顶部外边距为0，与首页卡片对齐 */
+    max-width: 800px;
+    margin: 0 auto var(--spacing-px-32) auto;
     position: relative;
     z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.post-detail-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-card-hover);
+}
+
+/* 评论卡片样式 */
+.comments-card {
+    background: var(--card-background-color);
+    border-radius: var(--border-radius-large);
+    box-shadow: 0 4px 12px var(--card-shadow-color);
+    padding: var(--spacing-px-32);
+    max-width: 800px;
+    margin: 0 auto var(--spacing-px-32) auto;
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.comments-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-card-hover);
+}
+
+.comments-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-dark-text);
+    margin-bottom: var(--spacing-px-24);
+    padding-bottom: var(--spacing-px-16);
+    border-bottom: 1px solid var(--color-border-lighter);
+}
+
+/* 列表布局下的详情页样式 */
+.posts-container.list-layout ~ main .post-featured-image-card,
+.posts-container.list-layout ~ main .post-detail-card {
+    background: var(--card-background-color);
+    box-shadow: 0 4px 12px var(--card-shadow-color);
+    max-width: 900px;
+    margin: 0 auto var(--spacing-px-32) auto;
+    transition: all 0.3s ease;
+}
+
+.posts-container.list-layout ~ main .post-featured-image-card:hover,
+.posts-container.list-layout ~ main .post-detail-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card-hover);
 }
 
 .post-detail-title {
@@ -417,6 +472,59 @@
     cursor: pointer;
 }
 
+@media (max-width: 768px) {
+    .post-detail-card {
+        padding: var(--spacing-md);
+        margin: 0 auto var(--spacing-lg) auto;
+        width: 100%;
+        background: var(--color-white);
+        border-radius: var(--border-radius-medium);
+        box-shadow: var(--shadow-image);
+        max-width: none;
+    }
+    .post-detail-title {
+        font-size: 1.8rem;
+    }
+    .post-detail-meta {
+        font-size: 1rem;
+    }
+    .post-detail-content {
+        font-size: 1.1rem;
+        line-height: 1.9;
+    }
+
+    .posts-container.list-layout ~ main .post-detail-card {
+        padding: var(--spacing-sm);
+        margin: 0 12px var(--spacing-lg) 12px;
+    }
+    
+    /* 移动端评论卡片样式 */
+    .comments-card {
+        padding: var(--spacing-md);
+        margin: 0 12px var(--spacing-lg) 12px;
+        width: calc(100% - 24px);
+    }
+    
+    .comments-title {
+        font-size: 1.3rem;
+        margin-bottom: var(--spacing-md);
+        padding-bottom: var(--spacing-sm);
+    }
+}
+.post-detail-tags {
+    margin-top: 2.5em;
+    font-size: 1.1rem;
+}
+
+.post-detail-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius-medium);
+    box-shadow: var(--shadow-image);
+    margin: 1.5rem 0;
+    cursor: pointer;
+}
+
 
 
 /* 修复顶部导航tab样式 */
@@ -473,7 +581,7 @@ body {
     align-items: flex-start;
     max-width: 1200px;
     margin: 0 auto; /* 移除顶部和底部的外边距 */
-    gap: var(--spacing-px-20);
+    gap: var(--spacing-px-32);
     background: none; /* 移除容器背景色 */
     padding: var(--spacing-px-24) var(--spacing-px-40); /* 添加内边距来替代原来的外边距 */
 }
@@ -542,7 +650,7 @@ a:hover {
 .sidebar .card {
     background-color: var(--color-white);
     padding: var(--spacing-px-20);
-    margin: 0 0 var(--spacing-px-20) 0;
+    margin: 0 0 var(--spacing-px-32) 0;
     border-radius: var(--border-radius-medium);
     box-shadow: var(--shadow-timeline-dot);
     width: 100%;
@@ -905,4 +1013,19 @@ a:hover {
 #dark-mode-toggle {
     cursor: pointer;
     margin-left: 8px; // Adjust as needed for spacing
+}
+
+/* 列表布局下的评论卡片样式 */
+.posts-container.list-layout ~ main .comments-card {
+    background: var(--card-background-color);
+    box-shadow: 0 4px 12px var(--card-shadow-color);
+    max-width: 900px;
+    margin: 0 auto var(--spacing-px-32) auto;
+    padding: 1.25rem;
+    transition: all 0.3s ease;
+}
+
+.posts-container.list-layout ~ main .comments-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card-hover);
 }

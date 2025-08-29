@@ -1,6 +1,6 @@
 {{ define "main" }}
   {{ with .Params.featured_image }}
-    <div class="post-featured-image">
+    <div class="post-featured-image-card">
       {{ $image := resources.Get . }}
       {{ if $image }}
         {{ $tiny := $image.Resize "200x webp" }}

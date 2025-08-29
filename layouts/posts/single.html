@@ -35,10 +35,10 @@
     <div class="post-detail-tags">
       {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
     </div>
-    {{ if site.Params.enableComments }}
-      {{ partial "waline.html" . }}
-    {{ end }}
   </div>
+  
+  <!-- 评论卡片 -->
+  {{ partial "comments-card.html" . }}
   
   <script>
     // 页面加载完成后显示访问量

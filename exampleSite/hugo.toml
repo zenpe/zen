@@ -1,0 +1,95 @@
+baseURL = 'https://example.com/'
+hasCJKLanguage = true
+title = "Zen Theme Demo"
+
+# Language configuration
+defaultContentLanguage = 'en'
+defaultContentLanguageInSubdir = false
+
+[pagination]
+  pagerSize = 10
+
+[languages]
+  [languages.en]
+    languageCode = 'en-US'
+    languageName = 'English'
+    weight = 1
+    [languages.en.params]
+      [[languages.en.params.friendshipLinks]]
+        name = "Hugo Documentation"
+        url = "https://gohugo.io/"
+
+  [languages.zh]
+    languageCode = 'zh-CN'
+    languageName = '中文'
+    weight = 2
+    [languages.zh.params]
+      [[languages.zh.params.friendshipLinks]]
+        name = "Hugo中文文档"
+        url = "https://gohugo.io/"
+
+# Global parameters
+[params]
+  # Default post layout ("grid" or "list")
+  defaultPostLayout = "grid"
+  # Comment system configuration
+  enableComments = true
+  walineServerURL = "https://your-waline-server-url.vercel.app"
+
+[menus]
+
+[languages.en.menus]
+  [[languages.en.menus.main]]
+    name = 'Home'
+    pageRef = '/'
+    weight = 10
+
+  [[languages.en.menus.main]]
+    name = 'Archive'
+    pageRef = '/archive/'
+    weight = 20
+
+[languages.zh.menus]
+  [[languages.zh.menus.main]]
+    name = '首页'
+    pageRef = '/'
+    weight = 10
+
+  [[languages.zh.menus.main]]
+    name = '归档'
+    pageRef = '/archive/'
+    weight = 20
+
+[mediaTypes]
+  [mediaTypes."application/json"]
+    suffixes = ["json"]
+
+[outputs]
+  home = ["HTML", "RSS", "FlexSearch"]
+  section = ["HTML", "ArchiveJSON"]
+  taxonomy = ["HTML"]
+  term = ["HTML"]
+
+[outputFormats.ArchiveJSON]
+  mediaType = "application/json"
+  baseName = "archive-month"
+
+[outputFormats.FlexSearch]
+  mediaType = "application/json"
+  baseName = "flexsearch"
+
+[minify]
+  disableCSS = false
+  disableHTML = false
+  disableJS = false
+  disableJSON = false
+  disableSVG = false
+  disableXML = false
+  [minify.tdewolff.html]
+    keepComments = false
+    keepConditionalComments = true
+    keepDefaultAttrVals = true
+    keepDocumentTags = true
+    keepEndTags = true
+    keepQuotes = false
+    keepWhitespace = false

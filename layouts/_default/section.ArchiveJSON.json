@@ -1,0 +1,15 @@
+{{- $monthMap := dict -}}
+{{- $pages := where site.RegularPages "Type" "posts" -}}
+{{- $paginator := .Paginate $pages -}}
+
+{{- range $paginator.Pagers -}}
+    {{- $pageNumber := .PageNumber -}}
+    {{- range .Pages.GroupByDate "2006-01" -}}
+        {{- $month := .Key -}}
+        {{- if not (isset $monthMap $month) -}}
+            {{- $monthMap = merge $monthMap (dict $month $pageNumber) -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+
+{{- $monthMap | jsonify -}}

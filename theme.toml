@@ -1,0 +1,20 @@
+name = "Zen"
+license = "MIT"
+licenselink = "https://github.com/zenpe/zen/blob/master/LICENSE"
+description = "A clean and minimalist Hugo theme for personal blogs with multilingual support."
+homepage = "https://github.com/zenpe/zen"
+demosite = "https://niba.eu.org"
+tags = ["blog", "minimal", "clean", "responsive", "multilingual"]
+features = ["multilingual", "dark mode", "archive", "search", "comments"]
+theme_page_limit = 1000
+content_types = ["page", "section"]
+min_version = "0.146.0"
+
+[author]
+  name = "Your Name"
+  homepage = "https://niba.eu.org"
+
+[module]
+  [module.hugoVersion]
+    extended = false
+    min = "0.146.0"

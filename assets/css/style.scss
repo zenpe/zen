@@ -46,8 +46,6 @@
   --shadow-card-hover: 0 8px 16px rgba(0, 0, 0, 0.12);
   --shadow-small: 0 2px 6px rgba(0,0,0,0.05);
   --shadow-timeline-dot: 0 2px 4px rgba(0,0,0,0.1);
-  --shadow-post-detail-card: 0 4px 12px rgba(0, 0, 0, 0.15);
-  --shadow-post-detail-card: 0 4px 12px rgba(0, 0, 0, 0.15);
   --shadow-post-detail-card: 0 4px 12px rgba(0, 0, 0, 0.1);
     
 
@@ -210,6 +208,37 @@ body {
   gap: var(--spacing-px-12);
   text-decoration: none;
   color: inherit;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 4px 8px;
+  border-radius: var(--border-radius-medium);
+  overflow: hidden;
+}
+
+.navbar-brand::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(25, 118, 210, 0.1), transparent);
+  transition: all 0.6s ease;
+  transform: translateX(-100%);
+  z-index: 0;
+}
+
+.navbar-brand:hover {
+  color: var(--color-blue-primary);
+}
+
+.navbar-brand:hover::before {
+  transform: translateX(100%);
+}
+
+.navbar-brand > * {
+  position: relative;
+  z-index: 1;
 }
 .navbar-logo {
     font-size: 2rem;
@@ -220,12 +249,39 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.3s ease;
+    transform: rotate(0);
+}
+
+.navbar-brand:hover .navbar-logo {
+    transform: rotate(15deg);
+    background: var(--color-blue-primary);
+    color: white;
+    box-shadow: 0 4px 8px rgba(25, 118, 210, 0.3);
 }
 .navbar-title {
     font-size: 1.7rem;
     font-weight: 700;
     color: var(--color-dark-text);
     letter-spacing: 1px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.navbar-title::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-blue-primary), var(--color-orange-accent));
+    transition: width 0.3s ease;
+    border-radius: 3px;
+}
+
+.navbar-brand:hover .navbar-title::after {
+    width: 100%;
 }
 .navbar-center nav {
     background: transparent;
@@ -515,7 +571,9 @@ body {
 
   .terms-list-wrapper {
       padding: 20px;
-      margin: 0 12px 30px 12px;
+      margin: 0 auto 30px auto;
+      max-width: 900px;
+      width: 100%;
   }
   .terms-title {
       font-size: 1.4rem;
@@ -583,9 +641,7 @@ body {
   .search-result-item h3 {
       font-size: 1.1rem;
   }
-}
-
-@media (max-width: 768px) {
+  
   .container {
     flex-direction: column;
     padding: 0 1rem;
@@ -595,6 +651,87 @@ body {
   aside {
     width: 100%;
     margin-top: 0;
+  }
+}
+
+.terms-list-wrapper {
+    margin: 0 auto;
+    max-width: 900px;
+    padding: 30px;
+    width: 100%;
+}
+
+.terms-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.terms-item {
+    background: var(--color-light-gray);
+    border-radius: var(--border-radius-small);
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    flex: 1 1 auto;
+    min-width: 120px;
+    max-width: 250px;
+    width: fit-content;
+}
+
+.terms-link {
+    text-decoration: none;
+    color: var(--color-dark-text);
+    font-weight: 500;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.terms-count {
+    background: var(--color-blue-accent);
+    color: var(--color-white);
+    border-radius: var(--border-radius-circle);
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+.terms-item:hover {
+    background: var(--color-blue-accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-small);
+}
+
+.terms-item:hover .terms-link {
+    color: var(--color-white);
+}
+
+.terms-item:hover .terms-count {
+    background: var(--color-white);
+    color: var(--color-blue-accent);
+}
+
+@media (max-width: 768px) {
+  .terms-list-wrapper {
+      padding: 20px;
+      margin: 0 auto 30px auto;
+      max-width: 900px;
+      width: 100%;
+  }
+  
+  .terms-item {
+      min-width: 100px;
+      max-width: none;
+      flex: 1 1 40%;
+      width: fit-content;
   }
 }
 

@@ -11,7 +11,7 @@ content_types = ["page", "section"]
 min_version = "0.146.0"
 
 [author]
-  name = "Your Name"
+  name = "Zen Pe"
   homepage = "https://niba.eu.org"
 
 [module]

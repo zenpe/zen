@@ -2,7 +2,7 @@
   {{ with .Params.featured_image }}
     <div class="post-featured-image-card">
       <div class="featured-image-container">
-        <img src="{{ . | absURL }}" alt="{{ $.Title }}" />
+        <img src="{{ . | absURL }}" alt="{{ $.Title }}" onerror="this.style.display='none';" />
       </div>
     </div>
   {{ end }}

@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
-  {{ partial "timeline-list.html" . }}
+  <div class="posts-container list-layout">
+    {{ partial "timeline-list.html" . }}
+  </div>
 {{ end }}

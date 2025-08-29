@@ -56,9 +56,14 @@
     background: var(--color-white);
     border-radius: var(--border-radius-xl);
     box-shadow: var(--shadow-medium);
+    padding: var(--spacing-px-30) var(--spacing-sm);
+    margin: 0 auto;
     max-width: 900px;
-    margin: 0 auto var(--spacing-px-40) auto;
-    padding: var(--spacing-px-30) var(--spacing-px-40);
+    width: 100%;
+}
+
+.posts-container.list-layout {
+    margin: 0 auto;
 }
 
 .timeline-title {
@@ -186,7 +191,13 @@
 @media (max-width: 768px) {
     .timeline-wrapper {
         padding: var(--spacing-px-20) var(--spacing-px-24);
-        margin: 0 var(--spacing-px-12) var(--spacing-px-30) var(--spacing-px-12);
+        margin: 0 auto var(--spacing-px-30) auto;
+        max-width: none;
+        width: 100%;
+    }
+    
+    .posts-container.list-layout {
+        margin: 0 auto;
     }
     
     .timeline-title {

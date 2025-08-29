@@ -1,6 +1,6 @@
 baseURL = 'https://example.com/'
 hasCJKLanguage = true
-title = "Zen Theme Demo"
+
 
 # Language configuration
 defaultContentLanguage = 'en'
@@ -13,7 +13,9 @@ defaultContentLanguageInSubdir = false
   [languages.en]
     languageCode = 'en-US'
     languageName = 'English'
+    title = "Zen Theme Demo"
     weight = 1
+    contentDir = "content/en"
     [languages.en.params]
       [[languages.en.params.friendshipLinks]]
         name = "Hugo Documentation"
@@ -22,7 +24,9 @@ defaultContentLanguageInSubdir = false
   [languages.zh]
     languageCode = 'zh-CN'
     languageName = '中文'
+    title = "Zen主题演示"
     weight = 2
+    contentDir = "content/zh"
     [languages.zh.params]
       [[languages.zh.params.friendshipLinks]]
         name = "Hugo中文文档"
@@ -33,7 +37,7 @@ defaultContentLanguageInSubdir = false
   # Default post layout ("grid" or "list")
   defaultPostLayout = "grid"
   # Comment system configuration
-  enableComments = true
+  enableComments = false
   walineServerURL = "https://your-waline-server-url.vercel.app"
 
 [menus]
@@ -43,22 +47,26 @@ defaultContentLanguageInSubdir = false
     name = 'Home'
     pageRef = '/'
     weight = 10
+    identifier = 'home'
 
   [[languages.en.menus.main]]
     name = 'Archive'
     pageRef = '/archive/'
     weight = 20
+    identifier = 'archive'
 
 [languages.zh.menus]
   [[languages.zh.menus.main]]
     name = '首页'
     pageRef = '/'
     weight = 10
+    identifier = 'home'
 
   [[languages.zh.menus.main]]
     name = '归档'
     pageRef = '/archive/'
     weight = 20
+    identifier = 'archive'
 
 [mediaTypes]
   [mediaTypes."application/json"]

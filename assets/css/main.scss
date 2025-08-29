@@ -52,6 +52,7 @@
 }
 
 
+/* 时间轴样式 - 与首页布局保持一致 */
 .timeline-wrapper {
     background: var(--color-white);
     border-radius: var(--border-radius-xl);
@@ -234,51 +235,6 @@
     .timeline-meta {
         font-size: 0.9rem;
     }
-}
-/* term（标签详情页）专属紧凑卡片样式 */
-.term-list .post-card {
-    max-width: 600px;
-    margin: 0 auto var(--spacing-px-18) auto;
-    padding: var(--spacing-px-18) var(--spacing-px-24) 14px var(--spacing-px-24);
-    border-radius: var(--border-radius-card-compact);
-    box-shadow: var(--shadow-light);
-}
-.term-list .post-card-content {
-    gap: 8px;
-}
-.term-list .post-title {
-    font-size: 1.35rem;
-    font-weight: 500;
-    margin-bottom: 0.2em;
-}
-.term-list .post-meta {
-    font-size: 0.98rem;
-    color: var(--color-gray-text);
-    margin-bottom: 0;
-    gap: 0.8em;
-}
-.post-tags-bar {
-    margin-top: var(--spacing-px-32);
-    margin-bottom: var(--spacing-px-16);
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-px-16);
-}
-.post-tag-btn {
-    display: inline-block;
-    padding: 6px 22px;
-    background: var(--color-white);
-    color: var(--color-blue-accent);
-    border: 2px solid var(--color-light-blue-border);
-    border-radius: var(--border-radius-xxl);
-    font-size: 1.1rem;
-    transition: background 0.2s, color 0.2s, border 0.2s;
-    text-decoration: none;
-}
-.post-tag-btn:hover {
-    background: var(--color-light-blue-bg);
-    color: var(--color-blue-primary);
-    border-color: var(--color-blue-primary);
 }
 /* 文章详情页样式 */
 .post-featured-image-card {

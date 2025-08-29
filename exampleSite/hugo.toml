@@ -1,5 +1,6 @@
 baseURL = 'https://example.com/'
 hasCJKLanguage = true
+theme = 'zen'
 
 
 # Language configuration

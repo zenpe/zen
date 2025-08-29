@@ -43,8 +43,13 @@
   }
 
   .post-detail-card {
-      padding: var(--spacing-px-24) var(--spacing-px-20);
-      margin: 0 var(--spacing-px-12) var(--spacing-px-30) var(--spacing-px-12);
+      padding: var(--spacing-md);
+      margin: 0 auto var(--spacing-lg) auto;
+      width: 100%;
+      background: var(--color-white);
+      border-radius: var(--border-radius-medium);
+      box-shadow: var(--shadow-image);
+      max-width: none;
   }
   .post-detail-title {
       font-size: 1.8rem;
@@ -55,6 +60,64 @@
   .post-detail-content {
       font-size: 1.1rem;
       line-height: 1.9;
+      word-wrap: break-word;
+      word-break: break-word;
+      overflow-wrap: break-word;
+  }
+  
+  .post-detail-content pre {
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      max-width: 100%;
+      padding: 1rem;
+      border-radius: var(--border-radius-small);
+      background-color: var(--color-light-gray);
+      margin: 1rem 0;
+      box-shadow: var(--shadow-small);
+  }
+  
+  .post-detail-content code {
+      word-wrap: break-word;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9em;
+      padding: 0.2em 0.4em;
+      border-radius: var(--border-radius-small);
+      background-color: var(--color-light-gray);
+  }
+  
+  .post-detail-content pre code {
+      padding: 0;
+      background-color: transparent;
+      white-space: pre-wrap;
+  }
+  
+  .post-detail-content table {
+      display: block;
+      overflow-x: auto;
+      max-width: 100%;
+      white-space: nowrap;
+      border-collapse: collapse;
+      margin: 1rem 0;
+  }
+  
+  .post-detail-content table th,
+  .post-detail-content table td {
+      padding: 0.5rem;
+      border: 1px solid var(--color-border-light);
+      text-align: left;
+  }
+  
+  .post-detail-content table th {
+      background-color: var(--color-light-bg-alt);
+      font-weight: bold;
+  }
+  
+  .post-detail-content img {
+      max-width: 100%;
+      height: auto;
   }
 
   .terms-list-wrapper {

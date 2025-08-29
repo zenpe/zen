@@ -493,8 +493,13 @@ body {
   }
 
   .post-detail-card {
-      padding: 24px 20px;
-      margin: 0 12px 30px 12px;
+      padding: var(--spacing-md);
+      margin: 0 auto var(--spacing-lg) auto;
+      width: 100%;
+      background: var(--color-white);
+      border-radius: var(--border-radius-medium);
+      box-shadow: var(--shadow-image);
+      max-width: none;
   }
   .post-detail-title {
       font-size: 1.8rem;

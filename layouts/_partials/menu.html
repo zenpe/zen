@@ -8,11 +8,50 @@
   <ul>
     {{ range . }}
     <li>
-      <a href="{{ .URL | relLangURL }}" 
-         {{ if or ($page.IsMenuCurrent $menuID .) ($page.HasMenuCurrent $menuID .) }}aria-current="page"{{ end }}
-         {{ if .Title }}title="{{ .Title }}"{{ end }}>
-        {{ .Name }}
-      </a>
+      {{- $url := .URL }}
+      {{- with .Page }}
+        {{- $url = .RelPermalink }}
+      {{- else }}
+        {{- if hasPrefix .URL "/" }}
+          {{- $url = .URL | relLangURL }}
+        {{- else if eq .Identifier "archive" }}
+          {{- $url = "/archive/" | relLangURL }}
+        {{- end }}
+      {{- end }}
+      
+      {{- if eq .Identifier "tools" }}
+        <!-- 工具菜单，包含子菜单 -->
+        <div class="dropdown">
+          <a href="{{ $url | relLangURL }}" 
+             {{ if or ($page.IsMenuCurrent $menuID .) ($page.HasMenuCurrent $menuID .) }}aria-current="page"{{ end }}
+             {{ if .Title }}title="{{ .Title }}"{{ end }}
+             class="dropdown-toggle">
+            {{ .Name }}
+          </a>
+          <ul class="dropdown-menu">
+            {{ if eq site.Language.Lang "zh" }}
+              {{ range site.Params.toolsLinks }}
+              <li>
+                <a href="{{ .url | relLangURL }}" target="_blank">{{ .name }}</a>
+              </li>
+              {{ end }}
+            {{ else }}
+              {{ range site.Params.toolsLinksEn }}
+              <li>
+                <a href="{{ .url | relLangURL }}" target="_blank">{{ .name }}</a>
+              </li>
+              {{ end }}
+            {{ end }}
+          </ul>
+        </div>
+      {{- else }}
+        <!-- 普通菜单项 -->
+        <a href="{{ $url | relLangURL }}" 
+           {{ if or ($page.IsMenuCurrent $menuID .) ($page.HasMenuCurrent $menuID .) }}aria-current="page"{{ end }}
+           {{ if .Title }}title="{{ .Title }}"{{ end }}>
+          {{ .Name }}
+        </a>
+      {{- end }}
     </li>
     {{ end }}
   </ul>

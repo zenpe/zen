@@ -312,9 +312,136 @@ body {
     position: relative;
     z-index: 102; /* 确保链接在菜单项之上 */
 }
+.navbar-center a {
+    background: transparent;
+    color: var(--color-dark-text);
+    font-size: 1.08rem;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: var(--border-radius-small);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    z-index: 102;
+}
+
 .navbar-center a:hover, .navbar-center a.active, .navbar-center a[aria-current] {
     background: var(--color-light-gray);
     color: var(--color-blue-primary);
+}
+
+.navbar-center a::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--color-blue-primary);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.navbar-center a:hover::before, .navbar-center a.active::before, .navbar-center a[aria-current]::before {
+    width: 80%;
+}
+
+/* Dropdown menu styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: var(--border-radius-small);
+    transition: all 0.3s ease;
+}
+
+.dropdown-toggle::after {
+    content: "▼";
+    font-size: 0.6rem;
+    margin-left: 6px;
+    transition: transform 0.3s ease;
+}
+
+.dropdown:hover .dropdown-toggle::after {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--color-white);
+    border: 1px solid var(--color-light-border);
+    border-radius: var(--border-radius-medium);
+    box-shadow: var(--shadow-medium);
+    z-index: 1000;
+    min-width: 200px;
+    padding: 8px 0;
+    margin-top: 8px;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 20px;
+    width: 12px;
+    height: 12px;
+    background: var(--color-white);
+    border-left: 1px solid var(--color-light-border);
+    border-top: 1px solid var(--color-light-border);
+    transform: rotate(45deg);
+    z-index: 1001;
+}
+
+.dropdown-menu li {
+    margin: 0;
+    list-style: none;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 16px;
+    color: var(--color-dark-text);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    position: relative;
+    z-index: 1002;
+}
+
+.dropdown-menu a:hover {
+    background-color: var(--color-light-hover-bg);
+    color: var(--color-blue-primary);
+    padding-left: 20px;
+}
+
+.dropdown-menu a::before {
+    content: "▶";
+    font-size: 0.7rem;
+    margin-right: 8px;
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
+.dropdown-menu a:hover::before {
+    opacity: 1;
 }
 .navbar-right {
     display: flex;
